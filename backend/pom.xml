@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>ucll</groupId>
-	<artifactId>project-woonanker-backend</artifactId>
+	<artifactId>project-voteEase-backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>project-woonanker-backend</name>
+	<name>project-voteEase-backend</name>
 	<properties>
 		<java.version>17</java.version>
 	</properties>

@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-Application<project-woonanker-backend>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "backend.Application",
+      "projectName": "project-woonanker-backend",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}

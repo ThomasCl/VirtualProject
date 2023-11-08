@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "http://127.0.0.1:5500")
 @RestController
-@RequestMapping("api/woonanker")
+@RequestMapping("api/voteEase")
 public class Controller {
 
     @Autowired
