@@ -2,6 +2,7 @@ import "./globals.css";
 
 import Providers from "@/components/Providers";
 import Navbar from "@/components/navbar/Navbar";
+import { Toaster } from "@/components/ui/toaster";
 import type { Metadata } from "next";
 
 export default function RootLayout({
@@ -19,6 +20,7 @@ export default function RootLayout({
       <body>
         <Providers>
           <Navbar />
+          <Toaster />
           <main>{children}</main>
         </Providers>
       </body>

@@ -3,13 +3,13 @@
 import { Card } from "@/components/ui/card";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
-import { listenNowAlbums, madeForYouAlbums } from "./data/suggestions";
-import { AlbumArtwork } from "./components/albums-artwork";
+import { suggestions } from "./data/suggestions";
+import { SuggestionArtwork } from "./components/suggestion-artwork";
 
 export default function OverviewPage() {
   return (
     <>
-      <div className="mt-10 flex w-full border-spacing-y-2 items-center justify-center space-y-5 px-4 py-12 sm:px-6 lg:px-8 ">
+      <div className="flex w-full border-spacing-y-2 items-center justify-center space-y-5 px-4 py-12 sm:px-6 lg:px-8 ">
         <div className="flex max-w-2xl flex-col space-y-2">
           <div className="space-y-1">
             <h2 className="text-2xl font-semibold tracking-tight">
@@ -29,10 +29,10 @@ export default function OverviewPage() {
           <div className="relative">
             <ScrollArea>
               <div className="flex space-x-4 pb-4">
-                {listenNowAlbums.map((album) => (
-                  <AlbumArtwork
-                    key={album.name}
-                    album={album}
+                {suggestions.map((suggestion) => (
+                  <SuggestionArtwork
+                    key={suggestion.name}
+                    suggestion={suggestion}
                     className="w-[250px]"
                     aspectRatio="portrait"
                     width={250}
