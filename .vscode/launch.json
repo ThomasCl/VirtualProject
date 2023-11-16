@@ -9,6 +9,16 @@
       "projectName": "project-woonanker-backend",
       "args": "",
       "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-Application<project-voteEase-backend>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "backend.Application",
+      "projectName": "project-voteEase-backend",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
     }
   ]
 }
