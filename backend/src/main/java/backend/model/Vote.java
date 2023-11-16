@@ -58,11 +58,11 @@ public class Vote {
         this.description = description;
     }
 
-    public void setamount_of_votes(int amount_of_votes) {
+    public void setAmount_of_votes(int amount_of_votes) {
         this.amount_of_votes = amount_of_votes;
     }
 
-    public void setvoteable(Boolean voteable) {
+    public void setVoteable(Boolean voteable) {
         this.voteable = voteable;
     }
 }

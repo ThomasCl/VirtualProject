@@ -10,4 +10,6 @@ public interface VoteRepository extends JpaRepository<Vote, Long> {
     public Vote findHouseById(long id);
 
     public List<Vote> findByVoteable(boolean voteable);
+
+    public List<Vote> findTopXNonVoteables(int x);
 }
