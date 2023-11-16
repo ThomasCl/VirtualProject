@@ -1,62 +1,62 @@
-package backend.service;
+// package backend.service;
 
-import java.util.List;
+// import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+// import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.stereotype.Service;
 
-import backend.model.House;
-import backend.repo.HouseRepository;
+// import backend.model.House;
+// import backend.repo.HouseRepository;
 
-@Service
-public class HouseService {
-    @Autowired
-    private HouseRepository houseRepository;
+// @Service
+// public class HouseService {
+// @Autowired
+// private HouseRepository houseRepository;
 
-    public HouseService() {
-    }
+// public HouseService() {
+// }
 
-    public List<House> getAllHouses() {
-        return houseRepository.findAll();
-    }
+// public List<House> getAllHouses() {
+// return houseRepository.findAll();
+// }
 
-    public House getHouseById(long id) {
-        return houseRepository.findHouseById(id);
-    }
+// public House getHouseById(long id) {
+// return houseRepository.findHouseById(id);
+// }
 
-    public void addHouse(House house) {
-        houseRepository.save(house);
-    }
+// public void addHouse(House house) {
+// houseRepository.save(house);
+// }
 
-    public List<House> getAllByOrderBySlaapkamersDesc() {
-        return houseRepository.findAllByOrderBySlaapkamersDesc();
-    }
+// public List<House> getAllByOrderBySlaapkamersDesc() {
+// return houseRepository.findAllByOrderBySlaapkamersDesc();
+// }
 
-    public List<House> getAllByOrderBySlaapkamersAsc() {
-        return houseRepository.findAllByOrderBySlaapkamersAsc();
-    }
+// public List<House> getAllByOrderBySlaapkamersAsc() {
+// return houseRepository.findAllByOrderBySlaapkamersAsc();
+// }
 
-    public List<House> getAllByOrderByHuurprijsAsc() {
-        return houseRepository.findAllByOrderByHuurprijsAsc();
-    }
+// public List<House> getAllByOrderByHuurprijsAsc() {
+// return houseRepository.findAllByOrderByHuurprijsAsc();
+// }
 
-    public List<House> getAllByOrderByHuurprijsDesc() {
-        return houseRepository.findAllByOrderByHuurprijsDesc();
-    }
+// public List<House> getAllByOrderByHuurprijsDesc() {
+// return houseRepository.findAllByOrderByHuurprijsDesc();
+// }
 
-    public List<House> getAllByOrderByDatumAsc() {
-        return houseRepository.findAllByOrderByDatumAsc();
-    }
+// public List<House> getAllByOrderByDatumAsc() {
+// return houseRepository.findAllByOrderByDatumAsc();
+// }
 
-    public List<House> getAllByOrderByDatumDesc() {
-        return houseRepository.findAllByOrderByDatumDesc();
-    }
+// public List<House> getAllByOrderByDatumDesc() {
+// return houseRepository.findAllByOrderByDatumDesc();
+// }
 
-    public List<House> getAllByOrderByGrootteAsc() {
-        return houseRepository.findAllByOrderByGrootteAsc();
-    }
+// public List<House> getAllByOrderByGrootteAsc() {
+// return houseRepository.findAllByOrderByGrootteAsc();
+// }
 
-    public List<House> getAllByOrderByGrootteDesc() {
-        return houseRepository.findAllByOrderByGrootteDesc();
-    }
-}
+// public List<House> getAllByOrderByGrootteDesc() {
+// return houseRepository.findAllByOrderByGrootteDesc();
+// }
+// }

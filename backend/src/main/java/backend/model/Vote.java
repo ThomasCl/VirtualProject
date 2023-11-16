@@ -5,7 +5,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "vote", schema = "voteEase")
+@Table(name = "votes", schema = "public")
 public class Vote {
     @Id
     private Long id;
