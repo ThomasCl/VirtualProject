@@ -65,8 +65,8 @@ public class VoteController {
         }
     }
 
-    @PostMapping("/turnTopIntoVoteable")
-    public ResponseEntity<String> turnTopIntoVoteable(@RequestBody int amount) {
+    @PostMapping("/turnTopIntoVoteable/{amount}")
+    public ResponseEntity<String> turnTopIntoVoteable(@PathVariable int amount) {
         List<Vote> newVotes = voteService.turnTopIntoVoteable(amount);
 
         if (!newVotes.isEmpty()) {

@@ -67,6 +67,7 @@ public class VoteService {
 
     public List<Vote> turnTopIntoVoteable(int x) {
         List<Vote> topXNonVoteables = voteRepository.findTopXNonVoteables(x);
+        List<Vote> oldVotes = deleteOldVotes();
         topXNonVoteables.forEach(vote -> {
             // Set voteable to true
             vote.setVoteable(true);
@@ -80,6 +81,19 @@ public class VoteService {
     public Vote addAVote(int id) {
         Vote vote = getVoteById(id);
         vote.setAmount_of_votes(vote.getAmount_of_votes() + 1);
+        return vote;
+    }
+
+    public List<Vote> deleteOldVotes() {
+        List<Vote> oldvotes = getVoteByVoteable(true);
+        for (Vote oldvote : oldvotes) {
+            deleteVote(oldvote);
+        }
+        return oldvotes;
+    }
+
+    private Vote deleteVote(Vote vote) {
+        voteRepository.delete(vote);
         return vote;
     }
 }
