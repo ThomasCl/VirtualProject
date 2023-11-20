@@ -1,5 +1,7 @@
 package backend.model;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -10,6 +12,7 @@ public class Vote {
     @Id
     private Long id;
     private String name;
+    private List<String> pic;
     private String description;
     private int amount_of_votes; // could both be used to make it voteable (if voteable is false) and have it be
                                  // chosen (if voteable is true)
@@ -18,9 +21,10 @@ public class Vote {
     public Vote() {
     }
 
-    public Vote(Long id, String name, String description, int amount_of_votes, boolean voteable) {
+    public Vote(Long id, String name, List<String> pic, String description, int amount_of_votes, boolean voteable) {
         this.id = id;
         this.name = name;
+        this.pic = pic;
         this.description = description;
         this.amount_of_votes = amount_of_votes;
         this.voteable = voteable;
