@@ -38,7 +38,7 @@ export default function Navbar() {
         ? navigation
         : navigation.slice(0, 1);
     }
-    return [];
+    return navigation;
   }, [session]);
 
   return (
@@ -57,8 +57,7 @@ export default function Navbar() {
                 src={pic1}
                 alt="Logo VoteEase"
                 className={cn([{ "brightness-0 filter": theme == "light" }])}
-                width={100}
-                height={60}
+                width={150}
               />
               <NavigationMenu>
                 <NavigationMenuList>

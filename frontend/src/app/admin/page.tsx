@@ -1,20 +1,15 @@
-"use client";
+import CountdownTimer from "./countDownTimer";
 
-import { SuggestionsForm } from "./suggestions-form";
-
-export default function CreateSuggestionPage() {
+export default function AdminPage() {
   return (
     <>
       <div className="flex w-full border-spacing-y-2 items-center justify-center space-y-5 px-4 py-12 sm:px-6 lg:px-8 ">
         <div className="flex max-w-2xl flex-col space-y-2">
           <div className="space-y-2">
             <h2 className="text-2xl font-semibold tracking-tight">
-              Submit your idea!
+              Admin Page date
             </h2>
-            <p className="text-sm text-muted-foreground">
-              Fill the form below and share your idea with us!
-            </p>
-            <SuggestionsForm />
+            <CountdownTimer />
           </div>
         </div>
       </div>

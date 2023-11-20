@@ -15,14 +15,11 @@ export default withAuth(
         if (!token) {
           return true;
           return req.nextUrl.pathname === Pages.LOGIN;
-        } else {
-          return (
-            req.nextUrl.pathname === Pages.LOGIN ||
-            isAuthorisedForPages[token?.role as string]?.includes(
-              req.nextUrl.pathname,
-            )
+          isAuthorisedForPages[token?.role as string]?.includes(
+            req.nextUrl.pathname,
           );
         }
+        return true;
       },
     },
   },

@@ -39,7 +39,7 @@ const profileFormSchema = z.object({
   description: z.string().max(160).min(4),
   urls: z.array(
     z.object({
-      value: z.string().url({ message: "Please enter a valid URL." }),
+      text: z.string().url({ message: "Please enter a valid URL." }),
     }),
   ),
 });
@@ -48,7 +48,7 @@ type ProfileFormValues = z.infer<typeof profileFormSchema>;
 
 // This can come from your database or API.
 const defaultValues: Partial<ProfileFormValues> = {
-  urls: [{ value: "" }],
+  urls: [{ text: "" }],
 };
 
 export function SuggestionsForm() {
@@ -117,7 +117,7 @@ export function SuggestionsForm() {
             <FormField
               control={form.control}
               key={field.id}
-              name={`urls.${index}.value`}
+              name={`urls.${index}.text`}
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className={cn(index !== 0 && "sr-only")}>
@@ -139,7 +139,7 @@ export function SuggestionsForm() {
             variant="outline"
             size="sm"
             className="mt-2"
-            onClick={() => append({ value: "" })}
+            onClick={() => append({ text: "" })}
           >
             Add URL
           </Button>

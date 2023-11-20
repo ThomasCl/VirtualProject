@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 export default function SuggestionPage({ params }: any) {
-  const searchParams = useSearchParams();
+  const searchParams = useSearchParams(); 
   return (
     <>
       <div className="flex w-full border-spacing-y-2 items-center justify-center space-y-5 px-4 py-12 sm:px-6 lg:px-8 ">

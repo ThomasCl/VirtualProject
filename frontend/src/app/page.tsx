@@ -17,9 +17,7 @@ export default function LoginPage() {
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errors, setErrors] = useState<string[]>([]);
-  const { data: session } = useSession();
   const router = useRouter();
-  if (session) router.push("/internships");
   const { theme } = useTheme();
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
@@ -59,7 +57,7 @@ export default function LoginPage() {
           <div className="flex w-full justify-center">
             <Image
               src={pic1}
-              width={200}
+              width={300}
               alt="Picture of the logo"
               className={cn([{ "brightness-0 filter": theme == "light" }])}
             />
