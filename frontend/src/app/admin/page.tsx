@@ -7,7 +7,7 @@ export default function AdminPage() {
         <div className="flex max-w-2xl flex-col space-y-2">
           <div className="space-y-2">
             <h2 className="text-2xl font-semibold tracking-tight">
-              Admin Page date
+              Admin Page
             </h2>
             <CountdownTimer />
           </div>

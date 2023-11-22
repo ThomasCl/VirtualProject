@@ -1,10 +1,21 @@
 "use client";
-import React, { useCallback, useEffect, useState } from "react";
-import { format, addMonths, differenceInMilliseconds } from "date-fns";
+import React, { useEffect, useState } from "react";
+import { addMonths, differenceInMilliseconds, set } from "date-fns";
 
 const CountdownTimer = () => {
   const [timeRemaining, setTimeRemaining] = useState(
-    differenceInMilliseconds(addMonths(new Date(), 1).setDate(1), new Date()),
+    differenceInMilliseconds(
+      addMonths(
+        set(new Date(), {
+          hours: 0,
+          minutes: 0,
+          seconds: 0,
+          milliseconds: 0,
+        }),
+        1,
+      ).setDate(1),
+      new Date(),
+    ),
   );
 
   useEffect(() => {
@@ -15,25 +26,21 @@ const CountdownTimer = () => {
     calculateTimeRemaining();
   }, []);
 
-  const calculateTime = (): [number, number, number, number] => {
-    const remainingDays = timeRemaining % (1000 * 60 * 60 * 24);
-    const days = Math.floor(remainingDays);
-    const hours = Math.floor(days / (60 * 60 * 1000));
-    const minutes = Math.floor(
-      hours / (60 * 1000),
-    );
-    const seconds = Math.floor(
-      minutes / 1000,
-    );
-    return [days, hours, minutes, seconds];
-  };
-
-  const [days, hours, minutes, seconds] = calculateTime();
-
   return (
     <div>
       <h1>Countdown to Next Month</h1>
-      <p>{`Time remaining: ${days} days and ${hours} hours and ${minutes} minutes and ${seconds} seconds`}</p>
+      <p>{`Time remaining: ${Math.floor(
+        timeRemaining / (1000 * 60 * 60 * 24),
+      )} days and ${Math.floor(
+        (timeRemaining % (1000 * 60 * 60 * 24)) / (60 * 60 * 1000),
+      )} hours and ${Math.floor(
+        ((timeRemaining % (1000 * 60 * 60 * 24)) % (60 * 60 * 1000)) /
+          (60 * 1000),
+      )} minutes and ${Math.floor(
+        (((timeRemaining % (1000 * 60 * 60 * 24)) % (60 * 60 * 1000)) %
+          (60 * 1000)) /
+          1000,
+      )} seconds`}</p>
     </div>
   );
 };
