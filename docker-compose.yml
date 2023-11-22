@@ -1,14 +1,14 @@
 version: "3"
 
 services:
-  frontend:
-    build:
-      context: ./frontend # Path to the directory containing the frontend Dockerfile
-    ports:
-      - "3000:3000" # Map container port to host port
-
   backend:
     build:
       context: ./backend # Path to the directory containing the backend Dockerfile
     ports:
       - "8080:8080" # Map container port to host port
+
+  frontend:
+    build:
+      context: ./frontend # Path to the directory containing the frontend Dockerfile
+    ports:
+      - "3000:3000" # Map container port to host port
