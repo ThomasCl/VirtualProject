@@ -67,7 +67,7 @@ public class VoteService {
 
     public List<Vote> turnTopIntoVoteable(int x) {
         List<Vote> topXNonVoteables = voteRepository.findTopXNonVoteables(x);
-        List<Vote> oldVotes = deleteOldVotes();
+        deleteOldVotes();
         topXNonVoteables.forEach(vote -> {
             // Set voteable to true
             vote.setVoteable(true);
