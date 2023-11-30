@@ -3,6 +3,7 @@ export interface Suggestion {
   name: string;
   description: string;
   cover: string;
+  amount_of_votes: number;
 }
 
 export const suggestions = async (): Promise<Suggestion[]> => {
@@ -20,6 +21,7 @@ export const suggestions = async (): Promise<Suggestion[]> => {
       name: d.name,
       description: d.description,
       cover: d.pics,
+      amount_of_votes: d.amount_of_votes,
     }));
   } catch (error) {
     // Handle errors here

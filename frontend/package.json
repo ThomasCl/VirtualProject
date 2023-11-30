@@ -55,6 +55,7 @@
     "react-geocode": "^1.0.0-alpha.1",
     "react-hook-form": "^7.48.2",
     "react-hot-toast": "^2.4.0",
+    "recharts": "^2.10.2",
     "simplebar-react": "^3.2.2",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.7",

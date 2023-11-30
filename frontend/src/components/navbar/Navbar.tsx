@@ -28,7 +28,7 @@ const navigation = [
 ];
 
 export default function Navbar() {
-  const { theme } = useTheme();
+  const { resolvedTheme } = useTheme();
   const path = usePathname();
   const { data: session } = useSession();
 
@@ -56,7 +56,9 @@ export default function Navbar() {
               <Image
                 src={pic1}
                 alt="Logo VoteEase"
-                className={cn([{ "brightness-0 filter": theme == "light" }])}
+                className={cn([
+                  { "brightness-0 filter": resolvedTheme == "light" },
+                ])}
                 width={150}
               />
               <NavigationMenu>

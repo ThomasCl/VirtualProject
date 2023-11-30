@@ -18,7 +18,7 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errors, setErrors] = useState<string[]>([]);
   const router = useRouter();
-  const { theme } = useTheme();
+  const { resolvedTheme } = useTheme();
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
@@ -59,7 +59,7 @@ export default function LoginPage() {
               src={pic1}
               width={300}
               alt="Picture of the logo"
-              className={cn([{ "brightness-0 filter": theme == "light" }])}
+              className={cn([{ "brightness-0 filter": resolvedTheme == "light" }])}
             />
           </div>
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-card-foreground">

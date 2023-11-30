@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
 import { Card } from "@/components/ui/card";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Suggestion, suggestions } from "./data/suggestions";
 import { SuggestionArtwork } from "./components/suggestion-artwork";
+import { useEffect, useState } from "react";
 
 export default function OverviewPage() {
   const [suggestionList, setSuggestionList] = useState<Suggestion[]>([]);
@@ -16,7 +16,7 @@ export default function OverviewPage() {
         const data = await suggestions();
         setSuggestionList(data);
       } catch (error) {
-        console.error('Error fetching suggestions:', error);
+        console.error("Error fetching suggestions:", error);
       }
     };
 

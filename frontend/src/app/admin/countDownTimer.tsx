@@ -1,6 +1,7 @@
 "use client";
-import React, { useEffect, useState } from "react";
+
 import { addMonths, differenceInMilliseconds, set } from "date-fns";
+import { useEffect, useState } from "react";
 
 const CountdownTimer = () => {
   const [timeRemaining, setTimeRemaining] = useState(
@@ -28,21 +29,48 @@ const CountdownTimer = () => {
 
   return (
     <div>
-      <h1>Countdown to Next Month</h1>
-      <p>{`Time remaining: ${Math.floor(
-        timeRemaining / (1000 * 60 * 60 * 24),
-      )} days and ${Math.floor(
+      {Math.floor(timeRemaining / (1000 * 60 * 60 * 24)) !== 0 &&
+        Math.floor(timeRemaining / (1000 * 60 * 60 * 24)) + " days and "}
+      {Math.floor(
         (timeRemaining % (1000 * 60 * 60 * 24)) / (60 * 60 * 1000),
-      )} hours and ${Math.floor(
+      ) !== 0 &&
+        Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (60 * 60 * 1000)) +
+          " hours and "}
+      {Math.floor(
         ((timeRemaining % (1000 * 60 * 60 * 24)) % (60 * 60 * 1000)) /
           (60 * 1000),
-      )} minutes and ${Math.floor(
+      ) !== 0 &&
+        Math.floor(
+          ((timeRemaining % (1000 * 60 * 60 * 24)) % (60 * 60 * 1000)) /
+            (60 * 1000),
+        ) + " minutes and "}
+      {Math.floor(
         (((timeRemaining % (1000 * 60 * 60 * 24)) % (60 * 60 * 1000)) %
           (60 * 1000)) /
           1000,
-      )} seconds`}</p>
+      ) !== 0 &&
+        Math.floor(
+          (((timeRemaining % (1000 * 60 * 60 * 24)) % (60 * 60 * 1000)) %
+            (60 * 1000)) /
+            1000,
+        ) + " seconds"}
     </div>
   );
 };
 
 export default CountdownTimer;
+
+{
+  /* <p>{`${
+  Math.floor(timeRemaining / (1000 * 60 * 60 * 24)) !== 0 && "days and"
+} ${Math.floor(
+  (timeRemaining % (1000 * 60 * 60 * 24)) / (60 * 60 * 1000),
+)} hours and ${Math.floor(
+  ((timeRemaining % (1000 * 60 * 60 * 24)) % (60 * 60 * 1000)) /
+    (60 * 1000),
+)} minutes and ${Math.floor(
+  (((timeRemaining % (1000 * 60 * 60 * 24)) % (60 * 60 * 1000)) %
+    (60 * 1000)) /
+    1000,
+)} seconds`}</p> */
+}
