@@ -1,21 +1,12 @@
 "use client";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Chart from "./chart";
 import CountdownTimer from "./countDownTimer";
-import { useTheme } from "next-themes";
-import { cn } from "@/lib/utils";
 
 export default function AdminPage() {
-  const { resolvedTheme } = useTheme();
   return (
     <>
-      <div className="flex w-full border-spacing-y-2 items-center justify-center space-y-5 px-4 py-12 sm:px-6 lg:px-8 ">
+      <div className="pt- flex w-full border-spacing-y-2 items-center justify-center space-y-5 pt-6 sm:px-6 lg:px-8 ">
         <div className="flex w-full max-w-2xl flex-col space-y-2">
           <div className="space-y-2">
             <h2 className="text-2xl font-semibold tracking-tight">

@@ -25,4 +25,4 @@ export default withAuth(
   },
 );
 
-export const config = { matcher: Object.values(Pages) };
+export const config = { matcher: "/" };

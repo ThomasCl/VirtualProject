@@ -20,11 +20,10 @@ const CountdownTimer = () => {
   );
 
   useEffect(() => {
-    const calculateTimeRemaining = () => {
+    const intervalId = setInterval(() => {
       setTimeRemaining((prev) => prev - 1000);
-      setTimeout(calculateTimeRemaining, 1000);
-    };
-    calculateTimeRemaining();
+    }, 1000);
+    return () => clearInterval(intervalId);
   }, []);
 
   return (
@@ -48,12 +47,7 @@ const CountdownTimer = () => {
         (((timeRemaining % (1000 * 60 * 60 * 24)) % (60 * 60 * 1000)) %
           (60 * 1000)) /
           1000,
-      ) !== 0 &&
-        Math.floor(
-          (((timeRemaining % (1000 * 60 * 60 * 24)) % (60 * 60 * 1000)) %
-            (60 * 1000)) /
-            1000,
-        ) + " seconds"}
+      ) + " seconds"}
     </div>
   );
 };
