@@ -10,6 +10,19 @@ import {
 } from "recharts";
 import { suggestions } from "../suggestions-overview/data/suggestions";
 import { useEffect, useState } from "react";
+import { Card } from "@/components/ui/card";
+
+const CustomTooltip = ({ active, payload, label }: any) => {
+  if (active && payload && payload.length) {
+    return (
+      <Card className="bg-background p-2 text-text">
+        <p className="label">{`${label} has ${payload[0].value} votes`}</p>
+      </Card>
+    );
+  }
+
+  return null;
+};
 
 const Chart = () => {
   const [suggestionList, setSuggestionList] = useState<
@@ -51,8 +64,8 @@ const Chart = () => {
           axisLine={false}
           tickFormatter={(value) => `${value}`}
         />
-        <Tooltip />
-        <Bar dataKey="count" fill="#8BE78B" radius={[4, 4, 0, 0]} />
+        <Tooltip content={<CustomTooltip />} />
+        <Bar dataKey="count" fill="#3B82F6" radius={[4, 4, 0, 0]} />
       </BarChart>
     </ResponsiveContainer>
   );
