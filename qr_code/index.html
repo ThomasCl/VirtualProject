@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QRCode Reader</title>
+    <!-- Include QRCode reader scripts -->
+    <script type="text/javascript" src="./jsqrcode/src/grid.js"></script>
+    <script type="text/javascript" src="./jsqrcode/src/version.js"></script>
+    <script type="text/javascript" src="./jsqrcode/src/detector.js"></script>
+    <script type="text/javascript" src="./jsqrcode/src/formatinf.js"></script>
+    <script type="text/javascript" src="./jsqrcode/src/errorlevel.js"></script>
+    <script type="text/javascript" src="./jsqrcode/src/bitmat.js"></script>
+    <script type="text/javascript" src="./jsqrcode/src/datablock.js"></script>
+    <script type="text/javascript" src="./jsqrcode/src/bmparser.js"></script>
+    <script type="text/javascript" src="./jsqrcode/src/datamask.js"></script>
+    <script type="text/javascript" src="./jsqrcode/src/rsdecoder.js"></script>
+    <script type="text/javascript" src="./jsqrcode/src/gf256poly.js"></script>
+    <script type="text/javascript" src="./jsqrcode/src/gf256.js"></script>
+    <script type="text/javascript" src="./jsqrcode/src/decoder.js"></script>
+    <script type="text/javascript" src="./jsqrcode/src/qrcode.js"></script>
+    <script type="text/javascript" src="./jsqrcode/src/findpat.js"></script>
+    <script type="text/javascript" src="./jsqrcode/src/alignpat.js"></script>
+    <script type="text/javascript" src="./jsqrcode/src/databr.js"></script>
+    
+</head>
+<body>
+    <!-- Your webpage content here -->
+
+    <!-- Button to start the camera -->
+    <button id="startCameraBtn">Start Camera</button>
+
+    <!-- Optionally, display the decoded data -->
+    <div id="decodedData"></div>
+
+    <!-- Include your own scripts or content -->
+    <!-- ... -->
+
+    <!-- Initialize the QRCode reader -->
+    <script>
+        // Set up a callback function for decoded data
+        qrcode.callback = function(data) {
+            console.log('QRCode Data:', data);
+            // Display the decoded data in a popup window
+            window.alert('QRCode Data: ' + data);
+        };
+
+        // Initialize the webcam QRCode reader on button click
+        const startCameraBtn = document.getElementById('startCameraBtn');
+        startCameraBtn.addEventListener('click', function() {
+            const webcam = document.createElement('video');
+            webcam.setAttribute('autoplay', 'true');
+            webcam.setAttribute('playsinline', 'true');
+            webcam.style.width = '100%';
+            webcam.style.height = 'auto';
+            document.body.appendChild(webcam);
+
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ video: true })
+                    .then(function(stream) {
+                        webcam.srcObject = stream;
+                    })
+                    .catch(function(err) {
+                        console.error('Error accessing webcam:', err);
+                        document.body.removeChild(webcam);
+                    });
+            } else {
+                console.error('Webcam not supported on this browser.');
+            }
+        });
+    </script>
+</body>
+</html>

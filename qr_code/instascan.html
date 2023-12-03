@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QRCode Reader</title>
+    <!-- Include instascan library -->
+    <script type="text/javascript" src="instascan.min.js"></script>
+</head>
+<body>
+    <!-- Your webpage content here -->
+
+    <!-- Button to start the camera -->
+    <button id="startCameraBtn">Start Camera</button>
+
+    <!-- Optionally, display the decoded data -->
+    <div id="decodedData"></div>
+
+    <!-- Initialize the QRCode reader -->
+    <script>
+        // Initialize the webcam QRCode reader on button click
+        const startCameraBtn = document.getElementById('startCameraBtn');
+        const decodedDataDiv = document.getElementById('decodedData');
+        let scanner;
+
+        startCameraBtn.addEventListener('click', function() {
+            scanner = new Instascan.Scanner({ video: document.getElementById('webcam') });
+
+            scanner.addListener('scan', function(content) {
+                // Display the decoded data
+                decodedDataDiv.innerText = 'QRCode Data: ' + content;
+            });
+
+            Instascan.Camera.getCameras().then(function (cameras) {
+                if (cameras.length > 0) {
+                    scanner.start(cameras[0]);
+                } else {
+                    console.error('No cameras found.');
+                }
+            }).catch(function (e) {
+                console.error('Error accessing webcam:', e);
+            });
+        });
+    </script>
+</body>
+</html>
