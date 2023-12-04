@@ -1,6 +1,8 @@
 package backend.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -8,6 +10,7 @@ import jakarta.persistence.Table;
 @Table(name = "votes", schema = "public")
 public class Vote {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String pics;
@@ -19,8 +22,7 @@ public class Vote {
     public Vote() {
     }
 
-    public Vote(Long id, String name, String pics, String description, int amount_of_votes, boolean voteable) {
-        this.id = id;
+    public Vote(String name, String pics, String description, int amount_of_votes, boolean voteable) {
         this.name = name;
         this.pics = pics;
         this.description = description;

@@ -14,6 +14,7 @@ public class SuggestionService {
 
     @Autowired
     private SuggestionRepository suggestionRepository;
+    @Autowired
     private VoteService voteService;
 
     public List<Suggestion> getAllSuggestions() {
