@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: virtual
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: virtual
+  template:
+    metadata:
+      labels:
+        app: virtual
+    spec:
+      containers:
+        - name: virtual
+          image: mr1dentity/instascan:latest
+          ports:
+            - containerPort: 80

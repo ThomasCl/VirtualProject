@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QRCode Reader</title>
+    <!-- Include jsQR library -->
+    <script type="text/javascript" src="./jsQR.js"></script>
+</head>
+<body>
+    <!-- Your webpage content here -->
+
+    <!-- Button to start the camera -->
+    <button id="startCameraBtn">Start Camera</button>
+
+    <!-- Optionally, display the decoded data -->
+    <div id="decodedData"></div>
+
+    <!-- Include your own scripts or content -->
+    <!-- ... -->
+
+    <!-- Initialize the QRCode reader -->
+    <script>
+        // Initialize the webcam QRCode reader on button click
+        const startCameraBtn = document.getElementById('startCameraBtn');
+        const decodedDataDiv = document.getElementById('decodedData');
+        let videoStream;
+        let webcam; // Declare webcam in the outer scope
+
+        startCameraBtn.addEventListener('click', function () {
+            webcam = document.createElement('video');
+            webcam.setAttribute('autoplay', 'true');
+            webcam.setAttribute('playsinline', 'true');
+            webcam.style.width = '100%';
+            webcam.style.height = 'auto';
+            document.body.appendChild(webcam);
+
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function (stream) {
+                    videoStream = stream;
+                    webcam.srcObject = stream;
+
+                    // Start QR code scanning
+                    startQRCodeScanning();
+                })
+                .catch(function (err) {
+                    console.error('Error accessing webcam:', err);
+                    document.body.removeChild(webcam);
+                });
+        });
+
+        function startQRCodeScanning() {
+            const canvasElement = document.createElement('canvas');
+            const canvas = canvasElement.getContext('2d');
+
+            function scanQRCode() {
+                canvasElement.width = videoStream.getVideoTracks()[0].getSettings().width;
+                canvasElement.height = videoStream.getVideoTracks()[0].getSettings().height;
+                canvas.drawImage(webcam, 0, 0, canvasElement.width, canvasElement.height);
+
+                const imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
+                const code = jsQR(imageData.data, imageData.width, imageData.height);
+
+                if (code) {
+                    // Display the decoded data in a pop-up window
+                    window.alert('QRCode Data: ' + code.data);
+                }
+
+                // Request the next animation frame
+                requestAnimationFrame(scanQRCode);
+            }
+
+            // Start scanning
+            scanQRCode();
+        }
+    </script>
+</body>
+</html>
