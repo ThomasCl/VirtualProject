@@ -13,6 +13,9 @@
     <!-- Button to start the camera -->
     <button id="startCameraBtn">Start Camera</button>
 
+    <!-- Video element to display the webcam -->
+    <video id="webcam" playsinline></video>
+
     <!-- Optionally, display the decoded data -->
     <div id="decodedData"></div>
 
@@ -24,15 +27,22 @@
         let scanner;
 
         startCameraBtn.addEventListener('click', function() {
-            scanner = new Instascan.Scanner({ video: document.getElementById('webcam') });
+            // Create a video element
+            const video = document.getElementById('webcam');
 
+            // Initialize the Instascan scanner with the video element
+            scanner = new Instascan.Scanner({ video: video });
+            console.log("scanner: ", scanner);
             scanner.addListener('scan', function(content) {
+                console.log("scanned");
                 // Display the decoded data
                 decodedDataDiv.innerText = 'QRCode Data: ' + content;
             });
 
+            // Get available cameras and start scanning
             Instascan.Camera.getCameras().then(function (cameras) {
                 if (cameras.length > 0) {
+                    console.log("scanner.start");
                     scanner.start(cameras[0]);
                 } else {
                     console.error('No cameras found.');
