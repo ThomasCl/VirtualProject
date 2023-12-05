@@ -26,11 +26,10 @@ export const authOptions: NextAuthOptions = {
           return null;
         } else {
           return {
+            id: user.email,
+            name: user.name,
             email: user.email,
-            first_name: user.first_name,
-            last_name: user.last_name,
-            has_voted: user.has_voted,
-
+            role: user.role,
           };
         }
       },

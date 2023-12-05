@@ -1,10 +1,8 @@
 import { TRole } from "@/types/role.type";
 
 export type TUser = {
-  first_name: string;
-  last_name:string;
+  name: string; // Felix
   email: string;
   password: string;
-  // role: TRole;
-  has_voted:boolean;
+  role: TRole;
 };
