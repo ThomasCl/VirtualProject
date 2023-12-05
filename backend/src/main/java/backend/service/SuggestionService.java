@@ -24,12 +24,15 @@ public class SuggestionService {
         return suggestionRepository.findSuggestionById(id);
     }
 
-    public void addSuggestion(Suggestion suggestion) {
+    public Suggestion addSuggestion(Suggestion suggestion) {
         if (suggestion == null || suggestion.getTitle() == null || suggestion.getDescription() == null) {
             throw new IllegalArgumentException("Invalid suggestion data");
         }
-
+        if (suggestionRepository.existsByTitle(suggestion.getTitle())) {
+            throw new IllegalStateException("A suggestion with the same title already exists");
+        }
         suggestionRepository.save(suggestion);
+        return suggestionRepository.findSuggestionById(suggestion.getId());
     }
 
     // other

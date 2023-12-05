@@ -37,18 +37,19 @@ const profileFormSchema = z.object({
       message: "Title must not be longer than 30 characters.",
     }),
   description: z.string().max(160).min(4),
-  urls: z.array(
-    z.object({
-      text: z.string().url({ message: "Please enter a valid URL." }),
-    }),
-  ),
+  pics: z.string().refine((value) => {
+    const urls = value.split(',');
+    return urls.every(url => z.string().url());
+  }, {
+    message: "Please enter valid comma-separated URLs."
+  }),
 });
 
 type ProfileFormValues = z.infer<typeof profileFormSchema>;
 
 // This can come from your database or API.
 const defaultValues: Partial<ProfileFormValues> = {
-  urls: [{ text: "" }],
+  pics: "",
 };
 
 export function SuggestionsForm() {
@@ -60,20 +61,31 @@ export function SuggestionsForm() {
     mode: "onChange",
   });
 
-  const { fields, append, remove } = useFieldArray({
-    name: "urls",
-    control: form.control,
-  });
+  async function onSubmit(data: ProfileFormValues) {
+    try {
+      console.log(JSON.stringify(data));
+      const response = await fetch('http://localhost:8080/api/voteEase/suggestions/addSuggestion', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
 
-  function onSubmit(data: ProfileFormValues) {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
+      if (response.ok) {
+        toast({
+          title: "Submission successful",
+          description: "Your form data has been submitted successfully.",
+        });
+      } else {
+        throw new Error('Submission failed');
+      }
+    } catch (error) {
+      toast({
+        title: "Submission failed",
+        description: "There was an error submitting your form data.",
+      });
+    }
   }
 
   return (
@@ -112,49 +124,25 @@ export function SuggestionsForm() {
             </FormItem>
           )}
         />
-        <div>
-          {fields.map((field, index) => (
+         {/* Dynamic list of URL input fields */}
+         <div>
             <FormField
               control={form.control}
-              key={field.id}
-              name={`urls.${index}.text`}
+              name="pics"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className={cn(index !== 0 && "sr-only")}>
-                    URLs
+                  <FormLabel>
+                    URL
                   </FormLabel>
-                  <FormDescription className={cn(index !== 0 && "sr-only")}>
-                    Add links for the images
-                  </FormDescription>
                   <FormControl>
-                    <Input {...field} />
+                    <Input {...field} placeholder="Enter URL" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-          ))}
-          <Button
-            type="button"
-            variant="outline"
-            size="sm"
-            className="mt-2"
-            onClick={() => append({ text: "" })}
-          >
-            Add URL
-          </Button>
-          <span className="mx-1" />
-          <Button
-            type="button"
-            variant="outline"
-            size="sm"
-            className="mt-2"
-            disabled={fields.length === 1}
-            onClick={() => remove(fields.length - 1)}
-          >
-            Remove URL
-          </Button>
-        </div>
+          </div>
+
         <Button type="submit">Submit</Button>
       </form>
     </Form>
