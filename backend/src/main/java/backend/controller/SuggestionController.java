@@ -36,8 +36,8 @@ public class SuggestionController {
 
     // other
 
-    @PostMapping("/approve-or-deny/{id}")
-    public void approveOrDenySuggestion(@PathVariable long id, @RequestParam boolean approve) {
-        suggestionService.approveOrDenySuggestion(id, approve);
+    @PostMapping("/approve-or-deny/{title}/{approve}")
+    public String approveOrDenySuggestion(@PathVariable String title, @PathVariable boolean approve) {
+        return suggestionService.approveOrDenySuggestion(title, approve);
     }
 }

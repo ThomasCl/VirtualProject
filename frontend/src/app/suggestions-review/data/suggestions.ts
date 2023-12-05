@@ -1,13 +1,12 @@
-import { TVote } from "@/types/vote.type";
+import { TSuggestion } from "@/types/suggestion.type";
 export interface Suggestion {
-  name: string;
+  title: string;
   description: string;
   cover: string;
-  amount_of_votes: number;
 }
 
 export const suggestions = async (): Promise<Suggestion[]> => {
-  const url = 'http://localhost:8080/api/voteEase/votes/voteable/false';
+  const url = 'http://localhost:8080/api/voteEase/suggestions';
 
   try {
     const response = await fetch(url);
@@ -17,11 +16,10 @@ export const suggestions = async (): Promise<Suggestion[]> => {
 
     const data = await response.json();
 
-    return data.map((d: TVote) => ({
-      name: d.name,
+    return data.map((d: TSuggestion) => ({
+      title: d.title,
       description: d.description,
       cover: d.pics,
-      amount_of_votes: d.amount_of_votes,
     }));
   } catch (error) {
     // Handle errors here
