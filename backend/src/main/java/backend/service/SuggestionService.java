@@ -25,19 +25,26 @@ public class SuggestionService {
         return suggestionRepository.findSuggestionById(id);
     }
 
-    public void addSuggestion(Suggestion suggestion) {
+    public Suggestion getSuggestionByTitle(String title) {
+        return suggestionRepository.findSuggestionByTitle(title);
+    }
+
+    public Suggestion addSuggestion(Suggestion suggestion) {
         if (suggestion == null || suggestion.getTitle() == null || suggestion.getDescription() == null) {
             throw new IllegalArgumentException("Invalid suggestion data");
         }
-
+        if (suggestionRepository.existsByTitle(suggestion.getTitle())) {
+            throw new IllegalStateException("A suggestion with the same title already exists");
+        }
         suggestionRepository.save(suggestion);
+        return suggestionRepository.findSuggestionById(suggestion.getId());
     }
 
     // other
 
-    public void approveOrDenySuggestion(long id, boolean approve) {
-        Suggestion suggestion = getSuggestionById(id);
-
+    public String approveOrDenySuggestion(String title, boolean approve) {
+        Suggestion suggestion = getSuggestionByTitle(title);
+        System.out.println(suggestion);
         if (approve) {
             // If approved, you might want to create a new Vote based on the suggestion
             Vote vote = new Vote();
@@ -46,9 +53,14 @@ public class SuggestionService {
             vote.setDescription(suggestion.getDescription());
             vote.setAmount_of_votes(0);
             vote.setVoteable(false);
-
+            System.out.println(vote);
             // Save the new Vote
             voteService.addVote(vote);
+            suggestionRepository.delete(suggestion);
+            return (suggestion.getTitle() + " approved");
+        } else {
+            suggestionRepository.delete(suggestion);
+            return (suggestion.getTitle() + " denied");
         }
     }
 

@@ -10,4 +10,8 @@ public interface SuggestionRepository extends JpaRepository<Suggestion, Long> {
 
     public Suggestion findSuggestionById(long id);
 
+    public Suggestion findSuggestionByTitle(String title);
+
+    boolean existsByTitle(String title);
+
 }

@@ -3,7 +3,6 @@ package backend.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +20,7 @@ public class VoteService {
     }
 
     public Vote getVoteById(long id) {
-        return voteRepository.findHouseById(id);
+        return voteRepository.findVoteById(id);
     }
 
     public void addVote(Vote vote) {
@@ -35,18 +34,17 @@ public class VoteService {
         return voteRepository.findByVoteable(voteable);
     }
 
-    public boolean voteOnVoteable(Long id) {
-        Optional<Vote> optionalVote = voteRepository.findById(id);
-        if (optionalVote.isPresent()) {
-            Vote vote = optionalVote.get();
+    public Vote voteOnVoteable(String name) {
+        Vote vote = voteRepository.findVoteByName(name);
+        if (vote != null) {
             if (vote.getVoteable()) {
                 // Increase the amount_of_votes by one
                 vote.setAmount_of_votes(vote.getAmount_of_votes() + 1);
                 voteRepository.save(vote);
-                return true; // Vote successfully incremented
+                return vote; // Vote successfully incremented
             }
         }
-        return false; // Vote not found or not voteable
+        return null; // Vote not found or not voteable
     }
 
     public Map<String, Integer> voteOnPreliminaries(List<Integer> ids) {

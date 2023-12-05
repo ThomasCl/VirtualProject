@@ -10,7 +10,9 @@ import backend.model.Vote;
 public interface VoteRepository extends JpaRepository<Vote, Long> {
     public List<Vote> findAll();
 
-    public Vote findHouseById(long id);
+    public Vote findVoteById(long id);
+
+    public Vote findVoteByName(String name);
 
     public List<Vote> findByVoteable(boolean voteable);
 
