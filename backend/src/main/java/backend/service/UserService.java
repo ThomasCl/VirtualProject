@@ -22,7 +22,8 @@ public class UserService {
     }
 
     public User saveUser(User user) {
-        if (user == null || user.getEmail() == null || user.getPassword() == null) {
+        if (user == null || user.getEmail() == null || user.getPassword() == null || user.getFirst_name() == null
+                || user.getLast_name() == null) {
             throw new IllegalArgumentException("Invalid user data");
         }
 
@@ -31,6 +32,20 @@ public class UserService {
 
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    public User loginUser(String email, String password) {
+        if (email == null || password == null) {
+            throw new IllegalArgumentException("Invalid user data");
+        }
+
+        User user = userRepository.findByEmail(email);
+
+        if (user != null && user.getPassword().equals(password)) {
+            return user;
+        } else {
+            throw new IllegalArgumentException("Invalid user data");
+        }
     }
 
 }

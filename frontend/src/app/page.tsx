@@ -1,6 +1,6 @@
 "use client";
+import { getSession, signIn } from "next-auth/react";
 import Loading from "@/components/ui/Loading";
-import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { FormEventHandler, useEffect, useRef, useState } from "react";
 import Errors from "@/components/ui/Errors";
@@ -20,29 +20,52 @@ export default function LoginPage() {
   const router = useRouter();
   const { resolvedTheme } = useTheme();
 
-  const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
+ // ...
 
-    if (usernameOrEmail.current === null) return;
-    if (password.current === null) return;
-    const res = await signIn("credentials", {
-      usernameOrEmail: usernameOrEmail.current.value,
-      password: password.current.value,
-      redirect: false,
-      callbackUrl: "/suggestions-overview",
+const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
+  e.preventDefault();
+  setIsLoading(true);
+
+  if (usernameOrEmail.current === null || password.current === null) {
+    setIsLoading(false);
+    return;
+  }
+
+  try {
+    const response = await fetch("http://localhost:8080/api/voteEase/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: usernameOrEmail.current.value,
+        password: password.current.value,
+      }),
     });
 
-    if (res !== undefined && res.ok) {
+    if (response.ok) {
+      const user = await response.json();
+
+      // Use signIn to establish a session
+      await signIn("credentials", {
+        usernameOrEmail: usernameOrEmail.current.value,
+        password: password.current.value,
+        redirect: false,
+        callbackUrl: "/suggestions-overview",
+      });
+
+      // Redirect to the desired page
       router.push("/suggestions-overview");
     } else {
       setIsLoading(false);
-      usernameOrEmail.current.value = "";
-      password.current.value = "";
       setErrors(["Invalid credentials"]);
-      router.push("/suggestions-overview");
     }
-  };
+  } catch (error) {
+    setIsLoading(false);
+    setErrors(["An error occurred while logging in"]);
+  }
+};
+
   useEffect(() => {
     //object can be null
     if (usernameOrEmail.current !== null) {

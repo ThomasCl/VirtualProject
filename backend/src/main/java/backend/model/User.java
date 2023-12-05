@@ -36,15 +36,15 @@ public class User {
         return email;
     }
 
-    public String getFirstName() {
+    public String getFirst_name() {
         return first_name;
     }
 
-    public String getLastName() {
+    public String getLast_name() {
         return last_name;
     }
 
-    public boolean getHasVoted() {
+    public boolean getHas_voted() {
         return has_voted;
     }
 
@@ -60,15 +60,15 @@ public class User {
         this.email = email;
     }
 
-    public void setFirstName(String first_name) {
+    public void setFirst_name(String first_name) {
         this.first_name = first_name;
     }
 
-    public void setLastName(String last_name) {
+    public void setLast_name(String last_name) {
         this.last_name = last_name;
     }
 
-    public void setHasVoted(boolean has_voted) {
+    public void setHas_voted(boolean has_voted) {
         this.has_voted = has_voted;
     }
 

@@ -6,8 +6,10 @@ import { Separator } from "@/components/ui/separator";
 import { Suggestion, suggestions } from "./data/suggestions";
 import { SuggestionArtwork } from "./components/suggestion-artwork";
 import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 
 export default function OverviewPage() {
+  const { data: session, status } = useSession();
   const [suggestionList, setSuggestionList] = useState<Suggestion[]>([]);
 
   useEffect(() => {
@@ -29,9 +31,9 @@ export default function OverviewPage() {
         <div className="flex max-w-2xl flex-col space-y-2">
           <div className="space-y-1">
             <h2 className="text-2xl font-semibold tracking-tight">
-              Hi, John! 👋
+              Hi, {session?.user?.first_name || "User"}! 👋
             </h2>
-            <p className="text-sm text-muted-foreground">john@ucll.be</p>
+            <p className="text-sm text-muted-foreground">{session?.user?.email}</p>
           </div>
 
           <Card className="p-3">
