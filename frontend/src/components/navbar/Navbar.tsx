@@ -38,7 +38,7 @@ export default function Navbar() {
         ? navigation
         : navigation.slice(0, 1);
     }
-    return navigation;
+    return [];
   }, [session]);
 
   return (
