@@ -5,34 +5,37 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { useSession } from "next-auth/react";
+import { useEffect } from "react";
 export default function SuggestionPage({ params }: any) {
-  const searchParams = useSearchParams(); 
+  const searchParams = useSearchParams();
+  const { data: session, status } = useSession();
 
   const handleVoteButtonClick = async () => {
-    const name = searchParams?.get("name");
-    console.log(name);
-    if (name) {
+    if (params.id) {
       try {
         // Make a request to the API endpoint with the specified ID
-        const response = await fetch(`http://localhost:8080/api/voteEase/voteVoteable/${name}`, {
-          method: 'POST', // You can adjust the HTTP method as needed
-          headers: {
-            'Content-Type': 'application/json',
-            // Add any other headers if necessary
+        const response = await fetch(
+          `http://localhost:8080/api/voteEase/voteVoteable/${params.id}`,
+          {
+            method: "POST", // You can adjust the HTTP method as needed
+            headers: {
+              "Content-Type": "application/json",
+              // Add any other headers if necessary
+            },
+            // Add body if you need to send data in the request body
+            // body: JSON.stringify({ key: 'value' }),
           },
-          // Add body if you need to send data in the request body
-          // body: JSON.stringify({ key: 'value' }),
-        });
+        );
 
         // Handle the response as needed
-        console.log('API response:', response);
+        console.log("API response:", response);
       } catch (error) {
         // Handle errors
-        console.error('Error making API request:', error);
+        console.error("Error making API request:", error);
       }
     }
   };
-
 
   return (
     <>
@@ -60,9 +63,25 @@ export default function SuggestionPage({ params }: any) {
             <p className="text-sm text-muted-foreground">
               {searchParams?.get("description")}
             </p>
-            <Button className="w-full" variant={"outline"} asChild onClick={handleVoteButtonClick}>
-              <Link href={`/suggestions-vote`}>Vote</Link>
-            </Button>
+            {session?.user?.has_voted ? (
+              <Button
+                className="w-full"
+                variant={"outline"}
+                onClick={handleVoteButtonClick}
+                disabled
+              >
+                Vote
+              </Button>
+            ) : (
+              <Button
+                className="w-full"
+                variant={"outline"}
+                asChild
+                onClick={handleVoteButtonClick}
+              >
+                <Link href={`/suggestions-vote`}>Vote</Link>
+              </Button>
+            )}
           </div>
         </div>
       </div>

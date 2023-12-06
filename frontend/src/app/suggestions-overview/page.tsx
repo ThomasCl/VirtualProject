@@ -33,12 +33,26 @@ export default function OverviewPage() {
             <h2 className="text-2xl font-semibold tracking-tight">
               Hi, {session?.user?.first_name || "User"}! 👋
             </h2>
-            <p className="text-sm text-muted-foreground">{session?.user?.email}</p>
+            <p className="text-sm text-muted-foreground">
+              {session?.user?.email}
+            </p>
           </div>
 
           <Card className="p-3">
-            <h3 className="text-xl">The voting for this month is now open! </h3>
-            <p>Choose your favorite idea.</p>
+            {!session?.user.has_voted ? (
+              <>
+                <h3 className="text-xl">
+                  The voting for this month is now open!
+                </h3>
+                <p>Choose your favorite idea.</p>
+              </>
+            ) : (
+              <>
+                <h3 className="text-xl">
+                  You have made a vote for this month! Thank you!
+                </h3>
+              </>
+            )}
           </Card>
           <Separator className="my-4" />
           <div className="space-y-1">

@@ -34,8 +34,8 @@ public class VoteService {
         return voteRepository.findByVoteable(voteable);
     }
 
-    public Vote voteOnVoteable(String name) {
-        Vote vote = voteRepository.findVoteByName(name);
+    public Vote voteOnVoteable(String id) {
+        Vote vote = voteRepository.findVoteById(Long.parseLong(id));
         if (vote != null) {
             if (vote.getVoteable()) {
                 // Increase the amount_of_votes by one

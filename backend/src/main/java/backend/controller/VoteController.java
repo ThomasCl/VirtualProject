@@ -42,15 +42,15 @@ public class VoteController {
         return voteService.getVoteByVoteable(voteable);
     }
 
-    @PostMapping("/voteVoteable/{name}")
-    public ResponseEntity<String> voteOnVoteable(@PathVariable String name) {
-        Vote success = voteService.voteOnVoteable(name);
+    @PostMapping("/voteVoteable/{id}")
+    public ResponseEntity<String> voteOnVoteable(@PathVariable String id) {
+        Vote success = voteService.voteOnVoteable(id);
 
         if (success != null) {
             return ResponseEntity.ok("Vote recorded successfully for item " + success.getName());
         } else {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Failed to record vote for item " + name);
+                    .body("Failed to record vote for item " + id);
         }
     }
 

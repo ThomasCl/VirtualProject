@@ -1,5 +1,6 @@
 import { TVote } from "@/types/vote.type";
 export interface Suggestion {
+  id: number;
   name: string;
   description: string;
   cover: string;
@@ -7,7 +8,7 @@ export interface Suggestion {
 }
 
 export const suggestions = async (): Promise<Suggestion[]> => {
-  const url = 'http://localhost:8080/api/voteEase/votes/voteable/true';
+  const url = "http://localhost:8080/api/voteEase/votes/voteable/true";
 
   try {
     const response = await fetch(url);
@@ -18,6 +19,7 @@ export const suggestions = async (): Promise<Suggestion[]> => {
     const data = await response.json();
 
     return data.map((d: TVote) => ({
+      id: d.id,
       name: d.name,
       description: d.description,
       cover: d.pics,
@@ -25,7 +27,7 @@ export const suggestions = async (): Promise<Suggestion[]> => {
     }));
   } catch (error) {
     // Handle errors here
-    console.error('Fetch error:', error);
+    console.error("Fetch error:", error);
     return [];
   }
 };
