@@ -1,9 +1,19 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { signOut } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function FinishPage() {
+  const router = useRouter();
+  const signOutHandler = async () => {
+    const data = await signOut({
+      redirect: false,
+      callbackUrl: "/",
+    });
+    router.push(data.url);
+  };
   return (
     <>
       <div className="flex w-full border-spacing-y-2 items-center justify-center space-y-5 px-4 py-12 sm:px-6 lg:px-8 ">
@@ -19,8 +29,8 @@ export default function FinishPage() {
               <Link href="/suggestions">Submit your own idea</Link>
             </Button>
             <p>or</p>
-            <Button variant={"outline"} asChild>
-              <Link href="">Logout</Link>
+            <Button variant={"outline"} name="Log out" onClick={signOutHandler}>
+              Log out
             </Button>
           </div>
         </div>
