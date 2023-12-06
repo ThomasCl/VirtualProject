@@ -42,9 +42,9 @@ public class VoteController {
         return voteService.getVoteByVoteable(voteable);
     }
 
-    @PostMapping("/voteVoteable/{id}")
-    public ResponseEntity<String> voteOnVoteable(@PathVariable String id) {
-        Vote success = voteService.voteOnVoteable(id);
+    @PostMapping("/voteVoteable/{id}/{userid}")
+    public ResponseEntity<String> voteOnVoteable(@PathVariable long id, @PathVariable long userid) {
+        Vote success = voteService.voteOnVoteable(id, userid);
 
         if (success != null) {
             return ResponseEntity.ok("Vote recorded successfully for item " + success.getName());

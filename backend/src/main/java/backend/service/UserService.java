@@ -21,6 +21,17 @@ public class UserService {
         return userRepository.findById(id).orElse(null);
     }
 
+    public boolean canVote(long userid) {
+        return !getUserById(userid).getHas_voted();
+    }
+
+    public void userVoted(long userid) {
+        User user = getUserById(userid);
+        user.setHas_voted(true);
+        System.out.println(user);
+        userRepository.save(user);
+    }
+
     public User saveUser(User user) {
         if (user == null || user.getEmail() == null || user.getPassword() == null || user.getFirst_name() == null
                 || user.getLast_name() == null) {

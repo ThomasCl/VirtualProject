@@ -16,7 +16,7 @@ export default function SuggestionPage({ params }: any) {
       try {
         // Make a request to the API endpoint with the specified ID
         const response = await fetch(
-          `http://localhost:8080/api/voteEase/voteVoteable/${params.id}`,
+          `http://localhost:8080/api/voteEase/voteVoteable/${params.id}/${session?.user?.id}`,
           {
             method: "POST", // You can adjust the HTTP method as needed
             headers: {
