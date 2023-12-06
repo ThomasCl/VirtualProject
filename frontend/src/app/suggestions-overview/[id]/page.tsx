@@ -9,7 +9,7 @@ import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 export default function SuggestionPage({ params }: any) {
   const searchParams = useSearchParams();
-  const { data: session, status } = useSession();
+  const { data: session, status, update } = useSession();
 
   const handleVoteButtonClick = async () => {
     if (params.id) {
@@ -27,6 +27,9 @@ export default function SuggestionPage({ params }: any) {
             // body: JSON.stringify({ key: 'value' }),
           },
         );
+        if (response.ok)
+          update({ ...session, user: { ...session?.user, has_voted: true } });
+        console.log(session?.user);
 
         // Handle the response as needed
         console.log("API response:", response);
