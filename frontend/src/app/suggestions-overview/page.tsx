@@ -21,7 +21,7 @@ export default function OverviewPage() {
         console.error("Error fetching suggestions:", error);
       }
     };
-
+    console.log(session);
     fetchData();
   }, []);
 

@@ -27,9 +27,10 @@ export default function SuggestionPage({ params }: any) {
             // body: JSON.stringify({ key: 'value' }),
           },
         );
-        if (response.ok)
+        if (response.ok) {
           update({ ...session, user: { ...session?.user, has_voted: true } });
-        console.log(session?.user);
+          console.log(session);
+        }
 
         // Handle the response as needed
         console.log("API response:", response);
