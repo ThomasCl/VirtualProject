@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import backend.model.Vote;
 import backend.service.VoteService;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://192.168.0.216:3000")
 @RestController
 @RequestMapping("api/voteEase")
 public class VoteController {
