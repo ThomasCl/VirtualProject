@@ -40,7 +40,7 @@ export default function SuggestionReview() {
               <div className="flex space-x-4 pb-4">
                 {suggestionList.map((suggestion) => (
                   <SuggestionArtwork
-                    key={suggestion.name}
+                    key={suggestion.title}
                     suggestion={suggestion}
                     className="w-[250px]"
                     aspectRatio="portrait"
