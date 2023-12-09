@@ -75,7 +75,7 @@ export default function SuggestionPage({ params }: any) {
                 onClick={handleVoteButtonClick}
                 disabled
               >
-                Vote
+                You already voted this month
               </Button>
             ) : (
               <Button
