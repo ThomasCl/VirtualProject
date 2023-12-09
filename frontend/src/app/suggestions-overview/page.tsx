@@ -21,7 +21,7 @@ export default function OverviewPage() {
         console.error("Error fetching suggestions:", error);
       }
     };
-
+    console.log(session);
     fetchData();
   }, []);
 
@@ -63,7 +63,7 @@ export default function OverviewPage() {
               <div className="flex space-x-4 pb-4">
                 {suggestionList.map((suggestion) => (
                   <SuggestionArtwork
-                    key={suggestion.name}
+                    key={suggestion.id}
                     suggestion={suggestion}
                     className="w-[250px]"
                     aspectRatio="portrait"

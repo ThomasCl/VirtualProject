@@ -4,6 +4,7 @@ import { ContextMenu, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { Suggestion } from "../data/suggestions";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import keys from "@/keys";
 
 interface SuggestionArtworkProps extends React.HTMLAttributes<HTMLDivElement> {
   suggestion: Suggestion;
@@ -22,7 +23,7 @@ export function SuggestionArtwork({
 }: SuggestionArtworkProps) {
   const handleVoteButtonClick = async (approve: boolean) => {
     try {
-      const response = await fetch(`http://localhost:8080/api/voteEase/approve-or-deny/${suggestion.title}/${approve}`, {
+      const response = await fetch(`${keys.NEXT_PUBLIC_URL}/api/voteEase/approve-or-deny/${suggestion.title}/${approve}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

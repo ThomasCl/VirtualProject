@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import backend.model.Vote;
 import backend.repo.VoteRepository;
@@ -14,6 +15,9 @@ import backend.repo.VoteRepository;
 public class VoteService {
     @Autowired
     private VoteRepository voteRepository;
+
+    @Autowired
+    private UserService userService;
 
     public List<Vote> getAllVotes() {
         return voteRepository.findAll();
@@ -34,13 +38,16 @@ public class VoteService {
         return voteRepository.findByVoteable(voteable);
     }
 
-    public Vote voteOnVoteable(String id) {
-        Vote vote = voteRepository.findVoteById(Long.parseLong(id));
+    @Transactional
+    public Vote voteOnVoteable(long id, long userid) {
+        Vote vote = voteRepository.findVoteById(id);
         if (vote != null) {
-            if (vote.getVoteable()) {
+            if (vote.getVoteable() && userService.canVote(userid)) {
                 // Increase the amount_of_votes by one
+                System.out.println("test test");
                 vote.setAmount_of_votes(vote.getAmount_of_votes() + 1);
                 voteRepository.save(vote);
+                userService.userVoted(userid);
                 return vote; // Vote successfully incremented
             }
         }

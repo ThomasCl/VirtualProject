@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
+import keys from "@/keys";
 
 const profileFormSchema = z.object({
   title: z
@@ -64,7 +65,7 @@ export function SuggestionsForm() {
   async function onSubmit(data: ProfileFormValues) {
     try {
       console.log(JSON.stringify(data));
-      const response = await fetch('http://localhost:8080/api/voteEase/suggestions/addSuggestion', {
+      const response = await fetch(`${keys.NEXT_PUBLIC_URL}/api/voteEase/suggestions/addSuggestion`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

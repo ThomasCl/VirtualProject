@@ -7,6 +7,7 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
+import keys from "@/keys";
 export default function SuggestionPage({ params }: any) {
   const searchParams = useSearchParams();
   const { data: session, status, update } = useSession();
@@ -16,7 +17,7 @@ export default function SuggestionPage({ params }: any) {
       try {
         // Make a request to the API endpoint with the specified ID
         const response = await fetch(
-          `http://localhost:8080/api/voteEase/voteVoteable/${params.id}`,
+          `${keys.NEXT_PUBLIC_URL}/api/voteEase/voteVoteable/${params.id}/${session?.user?.id}`,
           {
             method: "POST", // You can adjust the HTTP method as needed
             headers: {
@@ -27,9 +28,10 @@ export default function SuggestionPage({ params }: any) {
             // body: JSON.stringify({ key: 'value' }),
           },
         );
-        if (response.ok)
+        if (response.ok) {
           update({ ...session, user: { ...session?.user, has_voted: true } });
-        console.log(session?.user);
+          console.log(session);
+        }
 
         // Handle the response as needed
         console.log("API response:", response);

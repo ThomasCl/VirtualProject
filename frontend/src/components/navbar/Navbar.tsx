@@ -10,7 +10,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { ModeToggle } from "../dark-mode/switch";
 import DesktopLinks from "./DesktopLinks";
-import HamburgerMenu from "./HamburgerMenu";
 import ProfileDropDown from "./ProfileDropDown";
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
@@ -46,7 +45,6 @@ export default function Navbar() {
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
           {/*Mobile hamburger menu*/}
-          <HamburgerMenu navigation={filteredNavigation} />
           {/*Navbar*/}
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             {/*Logo*/}

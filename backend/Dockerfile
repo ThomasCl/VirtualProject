@@ -1,5 +1,5 @@
 # Use the official OpenJDK 11 image
-FROM openjdk:11-jre-slim
+FROM openjdk:17-jdk-slim
 
 # Set the working directory
 WORKDIR /app
