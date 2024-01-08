@@ -1,0 +1,23 @@
+specVersion: 0.35.0
+name: pytest
+runtime: python
+registry: ""
+image: docker.io/mr1dentity/pytest:latest
+imageDigest: ""
+created: 2024-01-02T15:43:04.4054084+01:00
+build:
+  buildpacks: []
+  builder: pack
+  buildEnvs: []
+run:
+  volumes: []
+  envs: []
+deploy:
+  namespace: ""
+  remote: false
+  annotations: {}
+  options: {}
+  labels: []
+  healthEndpoints:
+    liveness: /health/liveness
+    readiness: /health/readiness
