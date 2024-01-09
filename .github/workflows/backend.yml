@@ -51,6 +51,9 @@ jobs:
     if: github.ref == 'refs/heads/master'
 
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
       - name: Build Backend Docker Image
         run: docker build -t mr1dentity/backend-image:latest backend/
 
@@ -67,6 +70,9 @@ jobs:
     if: github.ref == 'refs/heads/dev'
 
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
       - name: Build Backend Docker Image
         run: docker build -t mr1dentity/backend-image:latest backend/
 
@@ -83,6 +89,9 @@ jobs:
     if: github.ref == 'refs/heads/qa'
 
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
       - name: Build Backend Docker Image
         run: docker build -t mr1dentity/backend-image:latest backend/
 
