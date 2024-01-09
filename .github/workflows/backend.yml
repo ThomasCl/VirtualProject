@@ -3,7 +3,7 @@ name: backend Pipeline
 on:
   push:
     branches:
-      - main
+      - master
       - dev
       - qa
       - "*"
@@ -22,6 +22,9 @@ jobs:
           distribution: "adopt"
           java-version: "11"
 
+      - name: Make mvnw executable
+        run: chmod +x backend/mvnw
+
       - name: Run Backend Tests
         run: |
           cd backend
@@ -29,7 +32,7 @@ jobs:
 
   prepare-for-build-and-push-backend:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/qa'
+    if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/qa'
     needs: run-tests
     steps:
       - name: Checkout Repository
@@ -48,7 +51,7 @@ jobs:
       - run-tests
       - prepare-for-build-and-push-backend
 
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/master'
 
     steps:
       - name: Build Backend Docker Image
