@@ -1,5 +1,6 @@
 {
   "java.compile.nullAnalysis.mode": "automatic",
   "editor.inlineSuggest.showToolbar": "always",
-  "java.configuration.updateBuildConfiguration": "interactive"
+  "java.configuration.updateBuildConfiguration": "interactive",
+  "java.debug.settings.onBuildFailureProceed": true
 }
