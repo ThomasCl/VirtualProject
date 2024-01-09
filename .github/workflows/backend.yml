@@ -64,10 +64,10 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Backend Docker Image
-        run: docker build -t mr1dentity/backend-image:latest backend/
+        run: docker build -t mr1dentity/backend-image:dev backend/
 
       - name: Push Backend Docker Image
-        run: docker push mr1dentity/backend-image:latest
+        run: docker push mr1dentity/backend-image:dev
 
   deploy-qa:
     runs-on: ubuntu-latest
@@ -85,7 +85,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Backend Docker Image
-        run: docker build -t mr1dentity/backend-image:latest backend/
+        run: docker build -t mr1dentity/backend-image:qa backend/
 
       - name: Push Backend Docker Image
-        run: docker push mr1dentity/backend-image:latest
+        run: docker push mr1dentity/backend-image:qa
