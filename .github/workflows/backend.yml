@@ -52,7 +52,7 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - run-tests
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/dev'
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -73,7 +73,7 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - run-tests
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/qa'
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
