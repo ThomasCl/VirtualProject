@@ -22,13 +22,10 @@ jobs:
           distribution: "adopt"
           java-version: "11"
 
-      - name: Make mvnw executable
-        run: chmod +x backend/mvnw
-
       - name: Run Backend Tests
         run: |
           cd backend
-          ./mvnw test  # Assuming you are using Maven for Java backend tests
+          mvn test  # Assuming you are using Maven for Java backend tests
 
   prepare-for-build-and-push-backend:
     runs-on: ubuntu-latest
