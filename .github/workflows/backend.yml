@@ -30,7 +30,7 @@ jobs:
   prepare-for-build-and-push-backend:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/qa'
-
+    needs: run-tests
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
