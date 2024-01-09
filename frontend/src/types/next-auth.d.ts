@@ -6,7 +6,14 @@ import { TRole } from "./role.type";
 // extending the default user type
 
 declare module "next-auth/jwt" {
-  interface JWT {}
+  interface JWT {
+    id: string;
+    email: string;
+    first_name: string;
+    last_name: string;
+    has_voted: boolean;
+    role: TRole;
+  }
 }
 
 declare module "next-auth" {
@@ -16,6 +23,11 @@ declare module "next-auth" {
 }
 declare module "next-auth" {
   interface User {
+    id: string;
+    email: string;
+    first_name: string;
+    last_name: string;
+    has_voted: boolean;
     role: TRole;
   }
 }

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import backend.model.Vote;
 import backend.service.VoteService;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000", "https://ivp.digitalpixel.pt"})
 @RestController
 @RequestMapping("api/voteEase")
 public class VoteController {
@@ -42,15 +42,15 @@ public class VoteController {
         return voteService.getVoteByVoteable(voteable);
     }
 
-    @PostMapping("/voteVoteable/{name}")
-    public ResponseEntity<String> voteOnVoteable(@PathVariable String name) {
-        Vote success = voteService.voteOnVoteable(name);
+    @PostMapping("/voteVoteable/{id}/{userid}")
+    public ResponseEntity<String> voteOnVoteable(@PathVariable long id, @PathVariable long userid) {
+        Vote success = voteService.voteOnVoteable(id, userid);
 
         if (success != null) {
             return ResponseEntity.ok("Vote recorded successfully for item " + success.getName());
         } else {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Failed to record vote for item " + name);
+                    .body("Failed to record vote for item " + id);
         }
     }
 

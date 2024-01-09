@@ -1,3 +1,4 @@
+import keys from "@/keys";
 import { TSuggestion } from "@/types/suggestion.type";
 export interface Suggestion {
   title: string;
@@ -6,7 +7,7 @@ export interface Suggestion {
 }
 
 export const suggestions = async (): Promise<Suggestion[]> => {
-  const url = 'http://localhost:8080/api/voteEase/suggestions';
+  const url = `${keys.NEXT_PUBLIC_URL}/api/voteEase/suggestions`;
 
   try {
     const response = await fetch(url);

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = { "http://localhost:3000", "https://ivp.digitalpixel.pt" })
 @RestController
 @RequestMapping("api/voteEase")
 public class UserController {
@@ -25,8 +26,14 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public void registerUser(@RequestBody User user) {
-        userService.saveUser(user);
+    public User registerUser(@RequestBody User user) {
+        System.out.println(user);
+        return userService.saveUser(user);
+    }
+
+    @PostMapping("/login")
+    public User loginUser(@RequestBody User user) {
+        return userService.loginUser(user.getEmail(), user.getPassword());
     }
 
 }

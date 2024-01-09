@@ -1,5 +1,5 @@
 import loginService from "@/lib/loginService";
-import { TRole } from "@/types/role.type";
+import { Roles, TRole } from "@/types/role.type";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
@@ -25,11 +25,26 @@ export const authOptions: NextAuthOptions = {
         if (!user) {
           return null;
         } else {
+          /*
+          {
+            "id": 5,
+            "email": "r0803370@ucll.be",
+            "password": "t",
+            "first_name": "Thomas",
+            "last_name": "Claessens",
+            "has_voted": false
+          }
+          */
           return {
-            id: user.email,
-            name: user.name,
+            id: user.id,
             email: user.email,
-            role: user.role,
+            first_name: user.first_name,
+            last_name: user.last_name,
+            has_voted: user.has_voted,
+            role:
+              user.role ?? user.email === "john.doe@ucll.be"
+                ? Roles.ADMIN
+                : Roles.EMPLOYEE,
           };
         }
       },
@@ -38,8 +53,11 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     session: async ({ token, session }) => {
       if (token) {
-        session.user.name = token.name;
+        session.user.id = token.sub!;
         session.user.email = token.email;
+        session.user.first_name = token.first_name;
+        session.user.last_name = token.last_name;
+        session.user.has_voted = token.has_voted;
         session.user.role = token.role as TRole;
       }
       return session;

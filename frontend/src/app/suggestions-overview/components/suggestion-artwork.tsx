@@ -47,7 +47,7 @@ export function SuggestionArtwork({
         </div>
         <Button variant={"outline"} asChild>
           <Link
-            href={`/suggestions-overview/${suggestion.name}?name=${suggestion.name}&cover=${suggestion.cover}&description=${suggestion.description}`}
+            href={`/suggestions-overview/${suggestion.id}?name=${suggestion.name}&cover=${suggestion.cover}&description=${suggestion.description}`}
           >
             View
           </Link>

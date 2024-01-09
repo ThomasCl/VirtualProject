@@ -7,7 +7,7 @@ const login = async (
 	password: string,
 	session?: any
 ) => {
-	const res = await axios.post(`${keys.NEXT_PUBLIC_URL}/login`, {
+	const res = await axios.post(`${keys.NEXT_PUBLIC_URL}/api/voteEase/login`, {
 		email: usernameOrEmail,
 		password,
 	});

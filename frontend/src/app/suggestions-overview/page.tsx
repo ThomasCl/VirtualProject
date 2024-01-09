@@ -6,8 +6,10 @@ import { Separator } from "@/components/ui/separator";
 import { Suggestion, suggestions } from "./data/suggestions";
 import { SuggestionArtwork } from "./components/suggestion-artwork";
 import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 
 export default function OverviewPage() {
+  const { data: session, status } = useSession();
   const [suggestionList, setSuggestionList] = useState<Suggestion[]>([]);
 
   useEffect(() => {
@@ -19,7 +21,7 @@ export default function OverviewPage() {
         console.error("Error fetching suggestions:", error);
       }
     };
-
+    console.log(session);
     fetchData();
   }, []);
 
@@ -29,14 +31,28 @@ export default function OverviewPage() {
         <div className="flex max-w-2xl flex-col space-y-2">
           <div className="space-y-1">
             <h2 className="text-2xl font-semibold tracking-tight">
-              Hi, John! 👋
+              Hi, {session?.user?.first_name || "User"}! 👋
             </h2>
-            <p className="text-sm text-muted-foreground">john@ucll.be</p>
+            <p className="text-sm text-muted-foreground">
+              {session?.user?.email}
+            </p>
           </div>
 
           <Card className="p-3">
-            <h3 className="text-xl">The voting for this month is now open! </h3>
-            <p>Choose your favorite idea.</p>
+            {!session?.user.has_voted ? (
+              <>
+                <h3 className="text-xl">
+                  The voting for this month is now open!
+                </h3>
+                <p>Choose your favorite idea.</p>
+              </>
+            ) : (
+              <>
+                <h3 className="text-xl">
+                  You have made a vote for this month! Thank you!
+                </h3>
+              </>
+            )}
           </Card>
           <Separator className="my-4" />
           <div className="space-y-1">
@@ -47,7 +63,7 @@ export default function OverviewPage() {
               <div className="flex space-x-4 pb-4">
                 {suggestionList.map((suggestion) => (
                   <SuggestionArtwork
-                    key={suggestion.name}
+                    key={suggestion.id}
                     suggestion={suggestion}
                     className="w-[250px]"
                     aspectRatio="portrait"

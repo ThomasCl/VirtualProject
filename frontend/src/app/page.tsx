@@ -10,10 +10,14 @@ import Image from "next/image";
 import pic1 from "../../public/logo-vote.png";
 import { cn } from "@/lib/utils";
 import { useTheme } from "next-themes";
+import QRCodeReader, { QRCodeReaderRef } from "@/components/qr-code/QRCodeReader";
 
 export default function LoginPage() {
   const usernameOrEmail = useRef<HTMLInputElement>(null);
   const password = useRef<HTMLInputElement>(null);
+
+  const [decodedData, setDecodedData] = useState<string | null>(null); //qrcode
+  const qrCodeReaderRef = useRef<QRCodeReaderRef | null>(null);
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errors, setErrors] = useState<string[]>([]);
@@ -40,9 +44,22 @@ export default function LoginPage() {
       usernameOrEmail.current.value = "";
       password.current.value = "";
       setErrors(["Invalid credentials"]);
-      router.push("/suggestions-overview");
+      router.push("/");
     }
   };
+
+  const handleQRCodeScan = (data: string) => {
+    setDecodedData(data);
+    if (usernameOrEmail.current && password.current) {
+      const [decodedEmail, decodedPassword] = data.split(':'); // Assuming the data is in the format "email:password"
+      usernameOrEmail.current.value = decodedEmail || '';
+      password.current.value = decodedPassword || '';
+      console.log(decodedEmail);
+      console.log(decodedPassword);
+    }
+      qrCodeReaderRef.current?.close();
+  };
+
   useEffect(() => {
     //object can be null
     if (usernameOrEmail.current !== null) {
@@ -59,7 +76,9 @@ export default function LoginPage() {
               src={pic1}
               width={300}
               alt="Picture of the logo"
-              className={cn([{ "brightness-0 filter": resolvedTheme == "light" }])}
+              className={cn([
+                { "brightness-0 filter": resolvedTheme == "light" },
+              ])}
             />
           </div>
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-card-foreground">
@@ -78,6 +97,9 @@ export default function LoginPage() {
               {!isLoading ? <p>Log in</p> : <Loading />}
             </Button>
           </form>
+          <div className="mt-8">
+            <QRCodeReader onScan={handleQRCodeScan}  />
+          </div>
         </div>
       </div>
     </>
