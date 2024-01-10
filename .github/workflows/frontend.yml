@@ -1,14 +1,64 @@
-name: Build and Push Frontend Docker Image
+# name: Build and Push Frontend Docker Image
+
+# on:
+#   push:
+#     branches:
+#       - master
+
+# jobs:
+#   build-and-push-frontend:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Checkout Repository
+#         uses: actions/checkout@v2
+
+#       - name: Login to Docker Hub
+#         uses: docker/login-action@v1
+#         with:
+#           username: ${{ secrets.DOCKER_USERNAME }}
+#           password: ${{ secrets.DOCKER_PASSWORD }}
+
+#       - name: Build Frontend Docker Image
+#         run: docker build -t mr1dentity/frontend-image:latest frontend/
+
+#       - name: Push Frontend Docker Image
+#         run: docker push mr1dentity/frontend-image:latest
+
+name: frontend Pipeline
 
 on:
   push:
     branches:
       - master
+      - dev
+      - qa
+      - "*"
 
 jobs:
-  build-and-push-frontend:
-    runs-on: ubuntu-latest
+  # run-tests:
+  #   runs-on: ubuntu-latest
 
+  #   steps:
+  #     - name: Checkout Repository
+  #       uses: actions/checkout@v2
+
+  #     - name: Set up Java
+  #       uses: actions/setup-java@v2
+  #       with:
+  #         distribution: "adopt"
+  #         java-version: "17"
+
+  #     - name: Run Backend Tests
+  #       run: |
+  #         cd backend
+  #         mvn test  # Assuming you are using Maven for Java backend tests
+
+  deploy-master:
+    runs-on: ubuntu-latest
+    # needs:
+    #   - run-tests
+    if: github.ref == 'refs/heads/master'
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -24,3 +74,45 @@ jobs:
 
       - name: Push Frontend Docker Image
         run: docker push mr1dentity/frontend-image:latest
+
+  deploy-dev:
+    runs-on: ubuntu-latest
+    # needs:
+    #   - run-tests
+    if: github.ref == 'refs/heads/dev'
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build Frontend Docker Image
+        run: docker build -t mr1dentity/frontend-image:dev frontend/
+
+      - name: Push Frontend Docker Image
+        run: docker push mr1dentity/frontend-image:dev
+
+  deploy-qa:
+    runs-on: ubuntu-latest
+    # needs:
+    #   - run-tests
+    if: github.ref == 'refs/heads/qa'
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build Frontend Docker Image
+        run: docker build -t mr1dentity/frontend-image:qa frontend/
+
+      - name: Push Frontend Docker Image
+        run: docker push mr1dentity/frontend-image:qa

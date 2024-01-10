@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: virtual
+  namespace: virtual-qa
   name: nextjs-app
 spec:
   replicas: 3
@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: nextjs
-          image: mr1dentity/virtual-frontend:1
+          image: mr1dentity/frontend-image:qa
           ports:
             - containerPort: 3000
 
@@ -23,7 +23,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: virtual-frontend-service
-  namespace: virtual
+  namespace: virtual-qa
 spec:
   selector:
     app: nextjs-app
@@ -39,7 +39,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: virtual-front-certificate
-  namespace: virtual
+  namespace: virtual-qa
 spec:
   secretName: virtual-ingress-cert
   dnsNames:
@@ -59,7 +59,7 @@ metadata:
     kubernetes.io/ingress.class: traefik
     cert-manager.io/cluster-issuer: letsencrypt-certs
   name: virtual-ingress
-  namespace: virtual
+  namespace: virtual-qa
 spec:
   rules:
     - host: virtual.65.co.ucll.cloud
