@@ -80,6 +80,10 @@ jobs:
     # needs:
     #   - run-tests
     if: github.ref == 'refs/heads/dev'
+    env:
+      NEXTAUTH_URL: http://frontend-service.virtual-production
+      NEXTAUTH_SECRET: yVGeMAiKykDq8dtfuIe49IRXvZInmZE4DqR+MsQvYXc=
+      NEXT_PUBLIC_URL: http://springboot-service.virtual-production:8080
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
