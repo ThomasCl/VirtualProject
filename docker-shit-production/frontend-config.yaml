@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-config
+  namespace: virtual-production
+data:
+  NEXTAUTH_URL: http://frontend-service.virtual-production
+  NEXTAUTH_SECRET: yVGeMAiKykDq8dtfuIe49IRXvZInmZE4DqR+MsQvYXc=
+  NEXT_PUBLIC_URL: http://springboot-service.virtual-production:8080
