@@ -62,7 +62,7 @@ metadata:
   namespace: virtual-qa
 spec:
   rules:
-    - host: virtual.65.co.ucll.cloud
+    - host: virtualqa.65.co.ucll.cloud
       http:
         paths:
         - path: /

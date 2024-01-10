@@ -62,7 +62,7 @@ metadata:
   namespace: virtual-development
 spec:
   rules:
-    - host: virtual.65.co.ucll.cloud
+    - host: virtualdev.65.co.ucll.cloud
       http:
         paths:
         - path: /
