@@ -6,7 +6,7 @@ WORKDIR /app
 
 # Copy all necessary files
 COPY . .
-
+COPY .env .env
 # Install dependencies and build the Next.js app
 RUN npm install
 RUN npm run build
