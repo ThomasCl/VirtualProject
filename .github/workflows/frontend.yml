@@ -76,6 +76,9 @@ jobs:
       - name: Copy .env into Docker Context
         run: cp .env frontend/
 
+      - name: Verify .env Content
+        run: cat frontend/.env
+
       - name: Build Frontend Docker Image
         run: docker build -t mr1dentity/frontend-image:latest frontend/
 
