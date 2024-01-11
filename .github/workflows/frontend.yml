@@ -73,6 +73,9 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Copy .env into Docker Context
+        run: cp .env frontend/
+
       - name: Build Frontend Docker Image
         run: docker build -t mr1dentity/frontend-image:latest frontend/
 
@@ -98,6 +101,9 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Copy .env into Docker Context
+        run: cp .env frontend/
+
       - name: Build Frontend Docker Image
         run: docker build -t mr1dentity/frontend-image:dev frontend/
 
@@ -122,6 +128,9 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Copy .env into Docker Context
+        run: cp .env frontend/
 
       - name: Build Frontend Docker Image
         run: docker build -t mr1dentity/frontend-image:qa frontend/
