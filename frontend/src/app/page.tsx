@@ -27,25 +27,25 @@ export default function LoginPage() {
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+    router.push("/suggestions-overview");
+    // if (usernameOrEmail.current === null) return;
+    // if (password.current === null) return;
+    // const res = await signIn("credentials", {
+    //   usernameOrEmail: usernameOrEmail.current.value,
+    //   password: password.current.value,
+    //   redirect: false,
+    //   callbackUrl: "/suggestions-overview",
+    // });
 
-    if (usernameOrEmail.current === null) return;
-    if (password.current === null) return;
-    const res = await signIn("credentials", {
-      usernameOrEmail: usernameOrEmail.current.value,
-      password: password.current.value,
-      redirect: false,
-      callbackUrl: "/suggestions-overview",
-    });
-
-    if (res !== undefined && res.ok) {
-      router.push("/suggestions-overview");
-    } else {
-      setIsLoading(false);
-      usernameOrEmail.current.value = "";
-      password.current.value = "";
-      setErrors(["Invalid credentials"]);
-      router.push("/");
-    }
+    // if (res !== undefined && res.ok) {
+    //   router.push("/suggestions-overview");
+    // } else {
+    //   setIsLoading(false);
+    //   usernameOrEmail.current.value = "";
+    //   password.current.value = "";
+    //   setErrors(["Invalid credentials"]);
+    //   router.push("/");
+    // }
   };
 
   const handleQRCodeScan = (data: string) => {

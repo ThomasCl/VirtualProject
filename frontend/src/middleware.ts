@@ -22,6 +22,7 @@ export default withAuth(
   {
     callbacks: {
       authorized: ({ token, req }) => {
+        return true;    //turned off authorisation
         if (!token) {
           return req.nextUrl.pathname === Pages.LOGIN;
         } else {

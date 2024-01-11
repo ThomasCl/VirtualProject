@@ -76,9 +76,6 @@ jobs:
       - name: Create .env file
         run: echo "NEXTAUTH_URL=${NEXTAUTH_URL}" >> frontend/.env && echo "NEXTAUTH_SECRET=${NEXTAUTH_SECRET}" >> frontend/.env && echo "NEXT_PUBLIC_URL=${NEXT_PUBLIC_URL}" >> frontend/.env
 
-      - name: Verify .env Content
-        run: cat frontend/.env
-
       - name: Build Frontend Docker Image
         run: docker build -t mr1dentity/frontend-image:latest frontend/
 
@@ -104,8 +101,8 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Copy .env into Docker Context
-        run: cp .env frontend/
+      - name: Create .env file
+        run: echo "NEXTAUTH_URL=${NEXTAUTH_URL}" >> frontend/.env && echo "NEXTAUTH_SECRET=${NEXTAUTH_SECRET}" >> frontend/.env && echo "NEXT_PUBLIC_URL=${NEXT_PUBLIC_URL}" >> frontend/.env
 
       - name: Build Frontend Docker Image
         run: docker build -t mr1dentity/frontend-image:dev frontend/
@@ -132,8 +129,8 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Copy .env into Docker Context
-        run: cp .env frontend/
+      - name: Create .env file
+        run: echo "NEXTAUTH_URL=${NEXTAUTH_URL}" >> frontend/.env && echo "NEXTAUTH_SECRET=${NEXTAUTH_SECRET}" >> frontend/.env && echo "NEXT_PUBLIC_URL=${NEXT_PUBLIC_URL}" >> frontend/.env
 
       - name: Build Frontend Docker Image
         run: docker build -t mr1dentity/frontend-image:qa frontend/
