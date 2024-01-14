@@ -54,7 +54,7 @@ export default function LoginPage() {
       const [decodedEmail, decodedPassword] = data.split(':'); // Assuming the data is in the format "email:password"
       usernameOrEmail.current.value = decodedEmail || '';
       password.current.value = decodedPassword || '';
-      console.log(decodedEmail);
+      console.log("test");
       console.log(decodedPassword);
     }
       qrCodeReaderRef.current?.close();
