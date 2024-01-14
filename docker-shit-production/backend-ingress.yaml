@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    # add an annotation indicating the issuer to use.
+    kubernetes.io/ingress.class: traefik
+    cert-manager.io/cluster-issuer: letsencrypt-certs
+  name: backend-ingress
+  namespace: virtual-production
+spec:
+  rules:
+    - host: api.virtual.65.co.ucll.cloud
+      http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: springboot-service
+              port:
+                number: 3000
+  tls: # < placing a host in the TLS config will determine what ends up in the cert's subjectAltNames
+  - hosts:
+    - api.virtual.65.co.ucll.cloud
+    secretName: api-ingress-cert # < cert-manager will store the created certificate in this secret.
