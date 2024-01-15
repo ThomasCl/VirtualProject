@@ -37,7 +37,8 @@ jobs:
     steps:
       - name: Determine Deployment Color
         id: set_color
-        run: echo "::set-output name=color::$(bash ./determine_color.sh)"
+        run: sh ./determine_color.sh
+        shell: pwsh
 
   deploy-master:
     runs-on: ubuntu-latest
