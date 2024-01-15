@@ -18,7 +18,8 @@ jobs:
     steps:
       - name: Determine Deployment Color
         id: set_color
-        run: cat color.txt
+        run: sh shit/determine_color.sh
+        shell: pwsh
 
   deploy-master:
     runs-on: ubuntu-latest
