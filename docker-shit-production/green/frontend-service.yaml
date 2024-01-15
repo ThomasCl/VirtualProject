@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: virtual-frontend-service
+  name: virtual-frontend-service-green
   namespace: virtual-production
 spec:
   selector:
-    app: nextjs-app
+    app: nextjs-app-green
   ports:
     - protocol: TCP
       port: 3000

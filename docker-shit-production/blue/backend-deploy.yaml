@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: virtual-production
+  name: springboot-app-blue
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: springboot-app-blue
+  template:
+    metadata:
+      labels:
+        app: springboot-app-blue
+    spec:
+      containers:
+        - name: springboot
+          image: mr1dentity/backend-image:blue
+          ports:
+            - containerPort: 8080

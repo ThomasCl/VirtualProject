@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: virtual-production
+  name: nextjs-app-blue
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nextjs-app-blue
+  template:
+    metadata:
+      labels:
+        app: nextjs-app-blue
+    spec:
+      containers:
+        - name: nextjs
+          image: mr1dentity/frontend-image:blue
+          ports:
+            - containerPort: 3000

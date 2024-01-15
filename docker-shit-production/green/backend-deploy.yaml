@@ -2,19 +2,19 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: virtual-production
-  name: springboot-app
+  name: springboot-app-green
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: springboot-app
+      app: springboot-app-green
   template:
     metadata:
       labels:
-        app: springboot-app
+        app: springboot-app-green
     spec:
       containers:
         - name: springboot
-          image: mr1dentity/backend-image:latest
+          image: mr1dentity/backend-image:green
           ports:
             - containerPort: 8080

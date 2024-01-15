@@ -2,19 +2,19 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: virtual-production
-  name: nextjs-app
+  name: nextjs-app-green
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: nextjs-app
+      app: nextjs-app-green
   template:
     metadata:
       labels:
-        app: nextjs-app
+        app: nextjs-app-green
     spec:
       containers:
         - name: nextjs
-          image: mr1dentity/frontend-image:latest
+          image: mr1dentity/frontend-image:green
           ports:
             - containerPort: 3000
