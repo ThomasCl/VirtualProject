@@ -18,8 +18,7 @@ jobs:
     steps:
       - name: Determine Deployment Color
         id: set_color
-        run: sh ${{ github.workspace }}/determine_color.sh
-        shell: pwsh
+        run: cat color.txt
 
   deploy-master:
     runs-on: ubuntu-latest
