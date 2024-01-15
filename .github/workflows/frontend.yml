@@ -16,8 +16,10 @@ jobs:
       step_output: ${{ steps.set_color.outputs.color }}
 
     steps:
-      - name: dir
-        run: ls -l
+      - name: Debug Root Directory Contents
+        run: |
+          ls -l
+          ls -l ./path/to/script
 
       - name: Determine Deployment Color
         id: set_color
