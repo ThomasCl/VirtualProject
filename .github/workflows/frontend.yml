@@ -19,7 +19,7 @@ jobs:
       - name: Debug Root Directory Contents
         run: |
           ls -l
-          ls -l ./path/to/script
+          ls -l ./
 
       - name: Determine Deployment Color
         id: set_color
