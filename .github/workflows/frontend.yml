@@ -1,30 +1,3 @@
-# name: Build and Push Frontend Docker Image
-
-# on:
-#   push:
-#     branches:
-#       - master
-
-# jobs:
-#   build-and-push-frontend:
-#     runs-on: ubuntu-latest
-
-#     steps:
-#       - name: Checkout Repository
-#         uses: actions/checkout@v2
-
-#       - name: Login to Docker Hub
-#         uses: docker/login-action@v1
-#         with:
-#           username: ${{ secrets.DOCKER_USERNAME }}
-#           password: ${{ secrets.DOCKER_PASSWORD }}
-
-#       - name: Build Frontend Docker Image
-#         run: docker build -t mr1dentity/frontend-image:latest frontend/
-
-#       - name: Push Frontend Docker Image
-#         run: docker push mr1dentity/frontend-image:latest
-
 name: frontend Pipeline
 
 on:
@@ -36,28 +9,20 @@ on:
       - "*"
 
 jobs:
-  # run-tests:
-  #   runs-on: ubuntu-latest
+  determine-color:
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    outputs:
+      step_output: ${{ steps.set_color.outputs.color }}
 
-  #   steps:
-  #     - name: Checkout Repository
-  #       uses: actions/checkout@v2
-
-  #     - name: Set up Java
-  #       uses: actions/setup-java@v2
-  #       with:
-  #         distribution: "adopt"
-  #         java-version: "17"
-
-  #     - name: Run Backend Tests
-  #       run: |
-  #         cd backend
-  #         mvn test  # Assuming you are using Maven for Java backend tests
+    steps:
+      - name: Determine Deployment Color
+        id: set_color
+        run: echo "::set-output name=color::$(bash determine_color.sh)"
 
   deploy-master:
     runs-on: ubuntu-latest
-    # needs:
-    #   - run-tests
+    needs: determine-color
     if: github.ref == 'refs/heads/master'
     env:
       NEXTAUTH_URL: http://localhost:3000
@@ -77,10 +42,11 @@ jobs:
         run: echo "NEXTAUTH_URL=${NEXTAUTH_URL}" >> frontend/.env && echo "NEXTAUTH_SECRET=${NEXTAUTH_SECRET}" >> frontend/.env && echo "NEXT_PUBLIC_URL=${NEXT_PUBLIC_URL}" >> frontend/.env
 
       - name: Build Frontend Docker Image
-        run: docker build -t mr1dentity/frontend-image:latest frontend/
+        run: COLOR=${{ needs.determine-color.outputs.step_output }}
+          docker build -t mr1dentity/frontend-image:$COLOR frontend/
 
       - name: Push Frontend Docker Image
-        run: docker push mr1dentity/frontend-image:latest
+        run: docker push mr1dentity/frontend-image:$COLOR
 
   deploy-dev:
     runs-on: ubuntu-latest

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Logic to determine the color (e.g., alternating between blue and green)
-CURRENT_COLOR=$(curl -s https://raw.githubusercontent.com/ThomasCl/VirtualProject/main/color.txt)
+CURRENT_COLOR=$(curl -s https://raw.githubusercontent.com/ThomasCl/VirtualProject/master/color.txt)
 if [ "$CURRENT_COLOR" == "blue" ]; then
   echo "green" > color.txt
 else
