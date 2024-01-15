@@ -42,7 +42,8 @@ jobs:
         run: echo "NEXTAUTH_URL=${NEXTAUTH_URL}" >> frontend/.env && echo "NEXTAUTH_SECRET=${NEXTAUTH_SECRET}" >> frontend/.env && echo "NEXT_PUBLIC_URL=${NEXT_PUBLIC_URL}" >> frontend/.env
 
       - name: Build Frontend Docker Image
-        run: COLOR=${{ needs.determine-color.outputs.step_output }}
+        run: |
+          COLOR=${{ needs.determine-color.outputs.step_output }}
           docker build -t mr1dentity/frontend-image:$COLOR frontend/
 
       - name: Push Frontend Docker Image
