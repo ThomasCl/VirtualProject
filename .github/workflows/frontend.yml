@@ -16,14 +16,9 @@ jobs:
       step_output: ${{ steps.set_color.outputs.color }}
 
     steps:
-      - name: Debug Root Directory Contents
-        run: |
-          ls -l
-          ls -l ./
-
       - name: Determine Deployment Color
         id: set_color
-        run: sh ./determine_color.sh
+        run: sh ${{ github.workspace }}/determine_color.sh
         shell: pwsh
 
   deploy-master:
