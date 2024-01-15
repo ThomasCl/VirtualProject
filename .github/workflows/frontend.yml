@@ -16,6 +16,9 @@ jobs:
       step_output: ${{ steps.set_color.outputs.color }}
 
     steps:
+      - name: dir
+        run: ls -l
+
       - name: Determine Deployment Color
         id: set_color
         run: sh ./determine_color.sh
