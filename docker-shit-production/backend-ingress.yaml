@@ -18,7 +18,7 @@ spec:
             service:
               name: springboot-service
               port:
-                number: 3000
+                number: 8080
   tls: # < placing a host in the TLS config will determine what ends up in the cert's subjectAltNames
   - hosts:
     - api.virtual.65.co.ucll.cloud
