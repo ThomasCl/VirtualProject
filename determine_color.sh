@@ -8,3 +8,4 @@ else
   echo "blue" > color.txt
 fi
 echo $CURRENT_COLOR
+ 
