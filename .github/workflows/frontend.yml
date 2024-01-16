@@ -19,6 +19,8 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: ls
+        uses: ls -l
       - name: Determine Deployment Color
         id: set_color
         run: sh determine_color.sh
