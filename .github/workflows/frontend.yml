@@ -50,7 +50,8 @@ jobs:
           docker build -t mr1dentity/frontend-image:$COLOR frontend/
 
       - name: Push Frontend Docker Image
-        run: COLOR=${{ needs.determine-color.outputs.step_output }}
+        run: |
+          COLOR=${{ needs.determine-color.outputs.step_output }}
           docker push mr1dentity/frontend-image:$COLOR
 
   deploy-dev:
