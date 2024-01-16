@@ -35,10 +35,12 @@ jobs:
       step_output: ${{ steps.set_color.outputs.color }}
 
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
       - name: Determine Deployment Color
         id: set_color
-        run: sh ./determine_color.sh
-        shell: pwsh
+        run: echo "::set-output name=color::$(bash determine_color.sh)"
 
   deploy-master:
     runs-on: ubuntu-latest
@@ -62,7 +64,8 @@ jobs:
           docker build -t mr1dentity/backend-image:$COLOR backend/
 
       - name: Push Backend Docker Image
-        run: docker push mr1dentity/backend-image:$COLOR
+        run: COLOR=${{ needs.determine-color.outputs.step_output }}
+          docker push mr1dentity/backend-image:$COLOR
 
   deploy-dev:
     runs-on: ubuntu-latest
