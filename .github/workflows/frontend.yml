@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: ls
-        uses: ls -l
+        run: ls -l
       - name: Determine Deployment Color
         id: set_color
         run: sh determine_color.sh
