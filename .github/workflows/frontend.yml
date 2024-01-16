@@ -22,14 +22,13 @@ jobs:
       - name: Determine Deployment Color
         id: set_color
         run: |
-          FRONTEND_COLOR=$(echo "${{ vars.FRONTEND_COLOR }}")
+          FRONTEND_COLOR= ${{ vars.FRONTEND_COLOR }}
           if [ "$FRONTEND_COLOR" = "blue" ]; then
             FRONTEND_COLOR="green"
           else
             FRONTEND_COLOR="blue"
           fi
-          echo FRONTEND_COLOR
-          echo "FRONTEND_COLOR=$FRONTEND_COLOR" >> $GITHUB_ENV
+          echo FRONTEND_COLOR > ${{ vars.FRONTEND_COLOR }}
 
   deploy-master:
     runs-on: ubuntu-latest
