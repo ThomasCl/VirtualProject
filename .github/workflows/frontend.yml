@@ -22,8 +22,7 @@ jobs:
       - name: Determine Deployment Color
         id: set_color
         run: |
-          FRONTEND_COLOR= ${{ vars.FRONTEND_COLOR }}
-          if [ "$FRONTEND_COLOR" = "blue" ]; then
+          if ${{ vars.FRONTEND_COLOR == 'blue' }}; then
             FRONTEND_COLOR="green"
           else
             FRONTEND_COLOR="blue"
