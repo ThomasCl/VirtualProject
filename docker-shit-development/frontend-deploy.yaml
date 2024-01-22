@@ -4,7 +4,7 @@ metadata:
   namespace: virtual-development
   name: nextjs-app
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: nextjs-app
