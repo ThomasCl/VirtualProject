@@ -6,16 +6,16 @@ metadata:
 spec:
   replicas: 1
   strategy:
-  canary:
-    steps:
-    - setWeight: 20
-    - pause: {duration: 10}
-    - setWeight: 40
-    - pause: {duration: 10}
-    - setWeight: 60
-    - pause: {duration: 10}
-    - setWeight: 80
-    - pause: {duration: 10}
+    canary:
+      steps:
+      - setWeight: 20
+      - pause: {duration: 10}
+      - setWeight: 40
+      - pause: {duration: 10}
+      - setWeight: 60
+      - pause: {duration: 10}
+      - setWeight: 80
+      - pause: {duration: 10}
   selector:
     matchLabels:
       app: springboot-app
