@@ -26,6 +26,6 @@ spec:
     spec:
       containers:
         - name: springboot
-          image: mr1dentity/backend-image:green
+          image: mr1dentity/backend-image:blue
           ports:
             - containerPort: 8080

@@ -26,6 +26,6 @@ spec:
     spec:
       containers:
         - name: nextjs
-          image: mr1dentity/frontend-image:green
+          image: mr1dentity/frontend-image:blue
           ports:
             - containerPort: 3000
