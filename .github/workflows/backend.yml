@@ -27,18 +27,10 @@ jobs:
           cd backend
           mvn test  # Assuming you are using Maven for Java backend tests
 
-  determine-color:
-    if: github.ref == 'refs/heads/master'
-    needs: run-tests
-    runs-on: ubuntu-latest
-    outputs:
-      step_output: blue
-
   deploy-master:
     runs-on: ubuntu-latest
     needs:
       - run-tests
-      - determine-color
     if: github.ref == 'refs/heads/master'
     steps:
       - name: Checkout Repository
@@ -52,12 +44,12 @@ jobs:
 
       - name: Build Backend Docker Image
         run: |
-          COLOR=${{ needs.determine-color.outputs.step_output }}
+          COLOR=blue
           docker build -t mr1dentity/backend-image:$COLOR backend/
 
       - name: Push Backend Docker Image
         run: |
-          COLOR=${{ needs.determine-color.outputs.step_output }}
+          COLOR=blue
           docker push mr1dentity/backend-image:$COLOR
 
   deploy-dev:
