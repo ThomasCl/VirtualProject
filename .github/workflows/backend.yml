@@ -44,12 +44,12 @@ jobs:
 
       - name: Build Backend Docker Image
         run: |
-          COLOR=blue
+          COLOR=green
           docker build -t mr1dentity/backend-image:$COLOR backend/
 
       - name: Push Backend Docker Image
         run: |
-          COLOR=blue
+          COLOR=green
           docker push mr1dentity/backend-image:$COLOR
 
   deploy-dev:
