@@ -13,19 +13,7 @@ jobs:
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     outputs:
-      step_output: ${{ steps.set_color.outputs.color }}
-
-    steps:
-      - name: Determine Deployment Color
-        id: set_color
-        run: |
-          if ${{ vars.FRONTEND_COLOR == 'blue' }}; then
-            FRONTEND_COLOR="green"
-          else
-            FRONTEND_COLOR="blue"
-          fi
-          echo "color=$FRONTEND_COLOR" >> "$GITHUB_OUTPUT"
-          echo "FRONTEND_COLOR=$FRONTEND_COLOR" >> $GITHUB_ENV
+      step_output: blue
 
   deploy-master:
     runs-on: ubuntu-latest

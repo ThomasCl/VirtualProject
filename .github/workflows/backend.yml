@@ -32,15 +32,7 @@ jobs:
     needs: run-tests
     runs-on: ubuntu-latest
     outputs:
-      step_output: ${{ steps.set_color.outputs.color }}
-
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-
-      - name: Determine Deployment Color
-        id: set_color
-        run: echo "::set-output name=color::$(bash determine_color.sh)"
+      step_output: blue
 
   deploy-master:
     runs-on: ubuntu-latest
