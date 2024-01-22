@@ -9,7 +9,7 @@ metadata:
   namespace: virtual-development
 spec:
   rules:
-    - host: virtualdev.65.co.ucll.cloud
+    - host: development.65.co.ucll.cloud
       http:
         paths:
         - path: /
@@ -21,5 +21,5 @@ spec:
                 number: 3000
   tls: # < placing a host in the TLS config will determine what ends up in the cert's subjectAltNames
   - hosts:
-    - virtual.65.co.ucll.cloud
+    - development.65.co.ucll.cloud
     secretName: virtual-ingress-cert # < cert-manager will store the created certificate in this secret.

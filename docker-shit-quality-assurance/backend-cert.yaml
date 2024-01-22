@@ -1,12 +1,12 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: virtual-front-certificate
+  name: virtual-back-certificate
   namespace: virtual-qa
 spec:
-  secretName: virtual-ingress-cert
+  secretName: api-ingress-cert
   dnsNames:
-    - qa.65.co.ucll.cloud
+    - api.qa.65.co.ucll.cloud
   issuerRef:
     name: letsencrypt-staging
     kind: ClusterIssuer

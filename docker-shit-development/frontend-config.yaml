@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-config
+  namespace: virtual-development
+data:
+  NEXTAUTH_URL: http://frontend-service.virtual-development
+  NEXTAUTH_SECRET: yVGeMAiKykDq8dtfuIe49IRXvZInmZE4DqR+MsQvYXc=
+  NEXT_PUBLIC_URL: https://api.development.65.co.ucll.cloud

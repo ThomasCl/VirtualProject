@@ -2,16 +2,16 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: virtual-production
-  name: springboot-app-blue
+  name: springboot-app
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: springboot-app-blue
+      app: springboot-app
   template:
     metadata:
       labels:
-        app: springboot-app-blue
+        app: springboot-app
     spec:
       containers:
         - name: springboot

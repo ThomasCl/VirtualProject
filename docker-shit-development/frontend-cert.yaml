@@ -6,7 +6,7 @@ metadata:
 spec:
   secretName: virtual-ingress-cert
   dnsNames:
-    - virtual.65.co.ucll.cloud
+    - development.65.co.ucll.cloud
   issuerRef:
     name: letsencrypt-staging
     kind: ClusterIssuer

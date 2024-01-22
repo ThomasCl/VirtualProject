@@ -2,16 +2,16 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: virtual-production
-  name: nextjs-app-green
+  name: nextjs-app
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: nextjs-app-green
+      app: nextjs-app
   template:
     metadata:
       labels:
-        app: nextjs-app-green
+        app: nextjs-app
     spec:
       containers:
         - name: nextjs

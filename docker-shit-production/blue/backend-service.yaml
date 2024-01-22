@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: springboot-service-blue
+  name: springboot-service
   namespace: virtual-production
 spec:
   selector:
-    app: springboot-app-blue
+    app: springboot-app
   ports:
     - protocol: TCP
       port: 8080
