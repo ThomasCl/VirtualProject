@@ -9,7 +9,8 @@ import backend.model.Suggestion;
 
 import backend.service.SuggestionService;
 
-@CrossOrigin(origins = {"http://localhost:3000", "https://ivp.digitalpixel.pt"})
+@CrossOrigin(origins = { "http://localhost:3000", "https://ivp.digitalpixel.pt", "https://development.65.co.ucll.cloud",
+        "https://virtual.65.co.ucll.cloud", "https://qa.65.co.ucll.cloud" })
 @RestController
 @RequestMapping("api/voteEase")
 public class SuggestionController {
